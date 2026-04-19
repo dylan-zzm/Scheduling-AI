@@ -1,0 +1,187 @@
+{
+  "metadata": {
+    "title": "AI Interview Scheduler",
+    "description": "Coordinate interview rounds, candidate self-scheduling, reminders, and no-show recovery with an AI scheduling agent."
+  },
+  "page": {
+    "title": "Interview Scheduling AI Agent",
+    "description": "A recruiting agent for calendar matching, candidate self-scheduling, time zone conversion, rescheduling, reminders, and no-show recovery."
+  },
+  "badge": "Agentic Workflow",
+  "defaults": {
+    "candidate_name": "Qiwen Yuan",
+    "candidate_email": "qiwen@example.com",
+    "job_title": "Talent Management Strategy Intern",
+    "notes": "Candidate prefers weekday daytime interviews and can do all rounds this week."
+  },
+  "timezones": {
+    "asia_shanghai": "China (UTC+8)",
+    "asia_singapore": "Singapore (UTC+8)",
+    "europe_london": "London",
+    "america_new_york": "New York",
+    "america_los_angeles": "Los Angeles",
+    "australia_sydney": "Sydney"
+  },
+  "roles": {
+    "recruiter": "Recruiter",
+    "hiring_manager": "Hiring Manager",
+    "cross_functional": "Cross-functional Interviewer"
+  },
+  "stages": {
+    "stage1": {
+      "label": "HR Screening"
+    },
+    "stage2": {
+      "label": "Business Interview"
+    },
+    "stage3": {
+      "label": "Cross-functional Round"
+    }
+  },
+  "status": {
+    "scheduled": "Scheduled",
+    "rescheduled": "Rescheduled",
+    "no_show": "No-show"
+  },
+  "form": {
+    "candidate_name": "Candidate Name",
+    "candidate_email": "Candidate Email",
+    "job_title": "Job Title",
+    "candidate_timezone": "Candidate Timezone",
+    "notes": "Scheduling Notes",
+    "run_agent": "Run Agent",
+    "running_agent": "Running Agent...",
+    "reset": "Reset"
+  },
+  "planner": {
+    "title": "AI Planner Output",
+    "description": "Run the agent to generate a recruiter-ready summary, messaging drafts, and operational risks.",
+    "recruiter_brief": "Recruiter brief",
+    "next_actions": "Next actions",
+    "risks": "Risks to monitor",
+    "placeholder": "Run the agent to generate this section.",
+    "errors": {
+      "generic": "Failed to generate the interview plan"
+    }
+  },
+  "console": {
+    "title": "Recruiter Scheduling Console",
+    "description": "The agent recommends the earliest feasible sequence while respecting time zones, stage order, and candidate-friendly hours.",
+    "interviewer_time": "Interviewer: {time} ({timezone})",
+    "book": "Book",
+    "reschedule": "Reschedule",
+    "no_show": "No-show",
+    "fallback_options": "Fallback options",
+    "no_slot": "No valid slot found for this stage."
+  },
+  "candidate": {
+    "title": "Candidate Self-Scheduling",
+    "description": "A candidate-facing view where the agent offers a few compliant slots instead of endless email back-and-forth.",
+    "current_stage_label": "Current stage",
+    "completed": "All rounds scheduled",
+    "all_booked": "All interview rounds are already booked. This panel will reopen if a stage needs to be rescheduled.",
+    "option_aria": "{stage} with {interviewer} at {time}",
+    "option_subtitle": "with {interviewer} · {stage}",
+    "confirm": "Confirm selected slot",
+    "simulate_no_show": "Simulate no-show recovery"
+  },
+  "notifications": {
+    "title": "Reminder & Notification Preview",
+    "candidate_confirmation_title": "Candidate confirmation",
+    "candidate_confirmation_body": "Hi {candidate}, your interview for {role} has been scheduled. The agent will send a reminder 24 hours and 1 hour before the meeting.",
+    "interviewer_reminder_title": "Interviewer reminder",
+    "interviewer_reminder_body": "You have an upcoming interview. Please review the candidate profile and submit structured feedback within 2 hours after the meeting.",
+    "no_show_policy_title": "No-show policy",
+    "no_show_policy_body": "If the candidate misses the interview, the agent offers one automatic rebooking opportunity using the next best compliant slot. Further exceptions escalate to a recruiter."
+  },
+  "dashboard": {
+    "title": "Agent Dashboard",
+    "description": "A simplified control tower for recruiter operations.",
+    "stages_configured": "Stages Configured",
+    "booked": "Booked",
+    "interviewers": "Interviewers",
+    "candidate_timezone": "Candidate TZ"
+  },
+  "guide": {
+    "title": "How this upgraded prototype works",
+    "tabs": {
+      "flow": "Flow",
+      "logic": "Logic",
+      "actions": "Actions",
+      "next": "Next Step"
+    },
+    "flow": {
+      "steps": [
+        {
+          "title": "1. Initial screen",
+          "description": "Candidate passes screening, ATS triggers the agent with role, stage, and timezone constraints."
+        },
+        {
+          "title": "2. Slot generation",
+          "description": "Agent checks interviewer calendars, applies stage order, candidate-friendly hours, and time zone conversion."
+        },
+        {
+          "title": "3. Candidate self-scheduling",
+          "description": "Candidate receives 3–5 compliant time options and confirms one without recruiter back-and-forth."
+        },
+        {
+          "title": "4. Confirmation & reminder",
+          "description": "Agent creates the booking, sends reminders, and syncs the interview status to ATS."
+        },
+        {
+          "title": "5. Exception handling",
+          "description": "If there is a conflict, reschedule request, or no-show, the agent offers one automatic rebooking before escalating to a human recruiter."
+        }
+      ]
+    },
+    "logic": {
+      "items": [
+        "1. Read candidate constraints and role requirements.",
+        "2. Check interviewer calendars and stage owners.",
+        "3. Score slots using earliest-fit plus candidate-friendly hour rules.",
+        "4. Offer candidate self-scheduling options and keep fallbacks ready.",
+        "5. Auto-rebook once on no-show, then escalate to a human recruiter."
+      ]
+    },
+    "actions": {
+      "items": [
+        "• Match calendars",
+        "• Convert time zones",
+        "• Chain multi-round interviews",
+        "• Let candidates self-schedule",
+        "• Auto-reschedule and handle one no-show recovery",
+        "• Trigger reminders in a production version"
+      ]
+    },
+    "next": {
+      "intro": "For a real production agent, connect this UI to:",
+      "items": [
+        "• ATS / CRM (Greenhouse, Lever, Workday)",
+        "• Calendar APIs (Google / Outlook)",
+        "• Communication channels (Email, SMS, WhatsApp, WeCom)",
+        "• Rules engine for interviewer assignment and escalation"
+      ]
+    }
+  },
+  "activity": {
+    "title": "Agent Activity",
+    "footer": "This prototype demonstrates workflow logic for scheduling, self-booking, reminders, and no-show recovery. In production, the agent would also create meeting links, sync ATS status, record exceptions, and escalate complex cases to a recruiter.",
+    "ready": "Agent ready: waiting for candidate details and stage rules.",
+    "reset": "Agent reset. Waiting for the next scheduling run.",
+    "run": {
+      "read_profile": "Read candidate profile for {candidate} ({role}).",
+      "detect_timezone": "Detected candidate timezone: {timezone}.",
+      "checked_calendars": "Checked interviewer calendars and applied working-hour constraints.",
+      "sequenced_rounds": "Sequenced multi-round interview plan with preferred earliest-fit logic.",
+      "generated_options": "Generated self-scheduling options, reminders, and fallback reschedule options."
+    },
+    "candidate_selected": "Candidate selected {stage} with {interviewer} at {time} ({timezone}).",
+    "recruiter_booked": "Booked {stage} with {interviewer} at {time} ({timezone}).",
+    "rescheduled": "Agent detected {reason} and rescheduled {stage} to {time} with {interviewer}.",
+    "no_show_detected": "No-show detected for {stage}. Triggering auto-rebooking policy.",
+    "reasons": {
+      "reschedule_requested": "reschedule requested",
+      "candidate_no_show": "candidate no-show"
+    }
+  }
+}
