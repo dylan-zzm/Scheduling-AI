@@ -2,10 +2,10 @@
   "header": {
     "id": "header",
     "brand": {
-      "title": "ShipAny Two",
+      "title": "Interview Scheduling AI Agent",
       "logo": {
         "src": "/logo.png",
-        "alt": "ShipAny Two",
+        "alt": "Interview Scheduling AI Agent",
         "width": 100,
         "height": 100
       },
@@ -14,116 +14,46 @@
     "nav": {
       "items": [
         {
-          "title": "功能亮点",
-          "url": "/#features",
+          "title": "产品演示",
+          "url": "/#demo",
           "icon": "Sparkles"
         },
         {
-          "title": "案例展示",
-          "url": "/showcases",
-          "icon": "Box"
+          "title": "招聘控制台",
+          "url": "/#recruiter-console",
+          "icon": "CalendarDays"
         },
         {
-          "title": "价格",
-          "url": "/pricing",
-          "icon": "DollarSign"
+          "title": "候选人自助预约",
+          "url": "/#candidate-self-scheduling",
+          "icon": "UserCheck"
         },
         {
-          "title": "AI",
-          "icon": "RiRobot2Line",
-          "children": [
-            {
-              "title": "AI 图片生成器",
-              "description": "使用 AI 生成图片",
-              "url": "/ai-image-generator",
-              "icon": "RiImage2Line"
-            },
-            {
-              "title": "AI 音乐生成器",
-              "description": "使用 AI 生成美妙的音乐",
-              "url": "/ai-music-generator",
-              "icon": "RiMusic2Line"
-            },
-            {
-              "title": "AI 视频生成器",
-              "description": "使用 AI 生成视频",
-              "url": "/ai-video-generator",
-              "icon": "RiVideoLine"
-            },
-            {
-              "title": "AI 聊天机器人",
-              "description": "与 AI 聊天机器人对话",
-              "url": "/chat",
-              "icon": "RiMessage2Line"
-            },
-            {
-              "title": "AI 面试安排 Agent",
-              "description": "用 AI Agent 自动协调面试安排",
-              "url": "/ai-interview-scheduler",
-              "icon": "CalendarClock"
-            }
-          ]
-        },
-        {
-          "title": "内容",
-          "icon": "FileText",
-          "children": [
-            {
-              "title": "博客",
-              "description": "阅读博客文章",
-              "url": "/blog",
-              "icon": "Newspaper"
-            },
-            {
-              "title": "更新日志",
-              "description": "阅读更新日志",
-              "url": "/updates",
-              "icon": "Clock"
-            },
-            {
-              "title": "文档",
-              "description": "阅读文档",
-              "url": "/docs",
-              "target": "_blank",
-              "icon": "BookOpenText"
-            }
-          ]
+          "title": "工作流逻辑",
+          "url": "/#workflow",
+          "icon": "GitBranch"
         }
       ]
     },
     "buttons": [],
     "user_nav": {
       "show_name": true,
-      "show_credits": true,
+      "show_credits": false,
       "show_sign_out": true,
-      "items": [
-        {
-          "title": "账单",
-          "url": "/settings/billing",
-          "icon": "CreditCard"
-        },
-        {
-          "title": "活动",
-          "url": "/activity",
-          "icon": "Activity"
-        }
-      ]
+      "items": []
     },
     "show_sign": true,
     "show_theme": true,
-    "show_locale": true,
-    "topbanner": {
-      "text": "此网站是 ShipAny 模板的演示站点，购买 ShipAny 模板，请访问 <a href='https://shipany.ai/zh/pricing' class='text-orange-300' target='_blank'>ShipAny 官网</a>"
-    }
+    "show_locale": true
   },
   "footer": {
     "id": "footer",
     "brand": {
-      "title": "ShipAny Two",
-      "description": "ShipAny 是专为 AI SaaS 创业项目打造的 NextJS 模板。丰富模板与组件，极速交付你的产品。",
+      "title": "Interview Scheduling AI Agent",
+      "description": "一个用于面试展示的成熟产品原型，重点呈现招聘排期控制台、候选人自助预约，以及异常处理工作流。",
       "logo": {
         "src": "/logo.png",
-        "alt": "ShipAny Two",
+        "alt": "Interview Scheduling AI Agent",
         "width": 100,
         "height": 100
       },
@@ -132,62 +62,62 @@
     "nav": {
       "items": [
         {
-          "title": "关于我们",
+          "title": "产品",
           "children": [
             {
-              "title": "功能亮点",
-              "url": "/#features",
+              "title": "演示首页",
+              "url": "/#demo",
               "target": "_self"
             },
             {
-              "title": "案例展示",
-              "url": "/showcases",
+              "title": "招聘控制台",
+              "url": "/#recruiter-console",
               "target": "_self"
             },
             {
-              "title": "价格",
-              "url": "/pricing",
+              "title": "候选人自助预约",
+              "url": "/#candidate-self-scheduling",
               "target": "_self"
             }
           ]
         },
         {
-          "title": "资源",
+          "title": "工作流",
           "children": [
             {
-              "title": "文档",
-              "url": "/docs",
+              "title": "排期逻辑",
+              "url": "/#workflow",
               "target": "_self"
             },
             {
-              "title": "博客",
-              "url": "/blog",
+              "title": "AI 规划输出",
+              "url": "/#planner-output",
               "target": "_self"
             },
             {
-              "title": "对话",
-              "url": "/chat",
-              "target": "_blank"
+              "title": "活动日志",
+              "url": "/#agent-activity",
+              "target": "_self"
             }
           ]
         },
         {
-          "title": "合作伙伴",
+          "title": "访问",
           "children": [
             {
-              "title": "ShipAny",
-              "url": "https://shipany.ai",
-              "target": "_blank"
+              "title": "Google 登录",
+              "url": "/sign-in",
+              "target": "_self"
             },
             {
-              "title": "ThinkAny",
-              "url": "https://thinkany.ai",
-              "target": "_blank"
+              "title": "产品概览",
+              "url": "/#overview",
+              "target": "_self"
             },
             {
-              "title": "MCP.so",
-              "url": "https://mcp.so",
-              "target": "_blank"
+              "title": "首页",
+              "url": "/",
+              "target": "_self"
             }
           ]
         }
@@ -196,44 +126,15 @@
     "social": {
       "items": [
         {
-          "title": "X",
-          "icon": "RiTwitterXFill",
-          "url": "https://x.com/your-app-name",
-          "target": "_blank"
-        },
-        {
-          "title": "Github",
+          "title": "GitHub",
           "icon": "Github",
-          "url": "https://github.com/your-app-name",
+          "url": "https://github.com/dylan-zzm/Scheduling-AI",
           "target": "_blank"
-        },
-        {
-          "title": "Discord",
-          "icon": "RiDiscordFill",
-          "url": "https://discord.gg/your-app-name",
-          "target": "_blank"
-        },
-        {
-          "title": "邮箱",
-          "icon": "Mail",
-          "url": "mailto:support@your-domain.com",
-          "target": "_self"
-        }
-      ]
-    },
-    "agreement": {
-      "items": [
-        {
-          "title": "隐私政策",
-          "url": "/privacy-policy"
-        },
-        {
-          "title": "服务条款",
-          "url": "/terms-of-service"
         }
       ]
     },
     "show_theme": true,
-    "show_locale": true
+    "show_locale": true,
+    "show_built_with": false
   }
 }

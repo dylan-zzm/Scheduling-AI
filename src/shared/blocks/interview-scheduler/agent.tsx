@@ -302,8 +302,9 @@ export function InterviewSchedulerAgent({
 
   return (
     <section
+      id="demo"
       className={cn(
-        'bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.12),transparent_34%),radial-gradient(circle_at_top_right,rgba(245,158,11,0.14),transparent_32%),linear-gradient(to_bottom,#f8fafc,#eef2ff)] px-4 py-8 md:px-6',
+        'scroll-mt-24 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.12),transparent_34%),radial-gradient(circle_at_top_right,rgba(245,158,11,0.14),transparent_32%),linear-gradient(to_bottom,#f8fafc,#eef2ff)] px-4 py-8 md:px-6',
         className
       )}
     >
@@ -311,7 +312,10 @@ export function InterviewSchedulerAgent({
 
       <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.12fr_0.88fr]">
         <div className="space-y-6">
-          <Card className="relative overflow-hidden rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/60 backdrop-blur">
+          <Card
+            id="overview"
+            className="scroll-mt-24 relative overflow-hidden rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/60 backdrop-blur"
+          >
             <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sky-500 via-cyan-500 to-amber-400" />
             <CardHeader>
               <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
@@ -394,7 +398,10 @@ export function InterviewSchedulerAgent({
             </CardContent>
           </Card>
 
-          <Card className="rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur">
+          <Card
+            id="recruiter-console"
+            className="scroll-mt-24 rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur"
+          >
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-xl">
                 <CalendarDays className="h-5 w-5 text-sky-600" />
@@ -514,7 +521,10 @@ export function InterviewSchedulerAgent({
         </div>
 
         <div className="space-y-6">
-          <Card className="rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur">
+          <Card
+            id="candidate-self-scheduling"
+            className="scroll-mt-24 rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur"
+          >
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-xl">
                 <UserCheck className="h-5 w-5 text-emerald-600" />
@@ -629,7 +639,10 @@ export function InterviewSchedulerAgent({
             </CardContent>
           </Card>
 
-          <Card className="rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur">
+          <Card
+            id="planner-output"
+            className="scroll-mt-24 rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur"
+          >
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-xl">
                 <Sparkles className="h-5 w-5 text-violet-600" />
@@ -759,7 +772,10 @@ export function InterviewSchedulerAgent({
             </CardContent>
           </Card>
 
-          <Card className="rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur">
+          <Card
+            id="workflow"
+            className="scroll-mt-24 rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur"
+          >
             <CardHeader>
               <CardTitle className="text-xl">{t('guide.title')}</CardTitle>
             </CardHeader>
@@ -802,7 +818,10 @@ export function InterviewSchedulerAgent({
             </CardContent>
           </Card>
 
-          <Card className="rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur">
+          <Card
+            id="agent-activity"
+            className="scroll-mt-24 rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur"
+          >
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-xl">
                 <AlertCircle className="h-5 w-5 text-rose-600" />
