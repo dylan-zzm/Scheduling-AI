@@ -1,5 +1,7 @@
 {
   "page": {
+    "title": "面试安排 AI Agent",
+    "description": "一个更像成熟 SaaS 产品的面试演示首页，重点展示招聘排期控制台、候选人自助预约与异常处理。",
     "show_sections": [
       "hero",
       "logos",
@@ -15,53 +17,54 @@
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "一小时快速上线你的 AI 创业项目",
-        "highlight_text": "一小时",
-        "description": "ShipAny 是用于构建 AI SaaS 创业项目的 NextJS 项目模板。<br/>集成常用功能，快速上线你的产品。",
+        "title": "让候选人感受到顺滑、让 recruiter 几乎无感的面试排期体验",
+        "highlight_text": "顺滑",
+        "description": "一个面向招聘流程的 AI 工作流：读取轮次规则、匹配面试官日历、完成时区换算，并在改期与爽约场景下自动恢复。",
         "announcement": {
-          "badge": "全新",
-          "title": "🎉 ShipAny 模板二已发布",
-          "url": "/pricing"
+          "badge": "在线演示",
+          "title": "招聘控制台 + 候选人自助预约 + 异常处理",
+          "url": "/#demo"
         },
-        "tip": "🎁 前 1000 名用户特价优惠",
+        "tip": "这是一个适合面试场景的产品原型，带有可点击的模拟数据和 Google 登录入口。",
         "buttons": [
           {
-            "title": "立即开始",
+            "title": "查看产品演示",
             "icon": "Zap",
-            "url": "/pricing",
+            "url": "/#demo",
             "target": "_self",
             "variant": "default"
           },
           {
-            "title": "阅读文档",
+            "title": "体验 Google 登录",
             "icon": "BookOpenText",
-            "url": "/docs",
-            "target": "_blank",
+            "url": "/sign-in",
+            "target": "_self",
             "variant": "outline"
           }
         ],
         "show_avatars": true,
-        "avatars_tip": "999+ 用户在使用 ShipAny 上站",
+        "avatars_tip": "不是单纯做一个页面，而是让面试官快速看懂业务深度",
         "show_award": false,
         "image": {
           "src": "/imgs/features/admin.png",
-          "alt": "hero",
+          "alt": "面试安排演示",
           "width": 1200,
           "height": 800
         },
         "image_invert": {
           "src": "/imgs/features/admin-dark.png",
-          "alt": "hero",
+          "alt": "面试安排演示",
           "width": 1200,
           "height": 800
         },
         "background_image": {
           "src": "/imgs/bg/tree.jpg",
-          "alt": "hero"
+          "alt": "hero 背景"
         }
       },
       "logos": {
-        "title": "ShipAny 使用以下技术栈构建",
+        "id": "logos",
+        "title": "用成熟 SaaS 产品的方式来呈现招聘场景，而不是只做一个静态 mockup",
         "items": [
           {
             "title": "Next.js",
@@ -103,48 +106,48 @@
       "introduce": {
         "block": "features-list",
         "id": "introduce",
-        "title": "ShipAny 是什么？",
-        "label": "产品简介",
-        "description": "ShipAny 是专为 AI SaaS 创业项目打造的 NextJS 脚手架，包括丰富模板、组件及文档。",
+        "title": "这个产品真正解决的是什么问题",
+        "label": "产品概览",
+        "description": "面试安排是招聘流程中频次高、规则清晰、但极其消耗 recruiter 时间的环节。这个原型把这类“高频行政协调”抽象成了一个非常适合 agent 先落地的场景。",
         "image": {
           "src": "/imgs/features/landing-page.png",
-          "alt": "introduce"
+          "alt": "产品概览"
         },
         "items": [
           {
-            "title": "开箱即用的模板",
-            "description": "从数十款生产级 AI SaaS 模板中选择，快速开启你的项目。",
+            "title": "招聘控制台",
+            "description": "让 recruiter 一眼看到推荐时间、备选时间、轮次顺序和当前状态，而不是在邮箱和日历之间来回切换。",
             "icon": "RiNextjsFill",
             "image": {
               "src": "/imgs/features/1.png",
-              "alt": "introduce"
+              "alt": "招聘控制台"
             }
           },
           {
-            "title": "基础设施搭建",
-            "description": "内置最佳实践，即刻拥有可扩展的基础设施。",
+            "title": "候选人自助预约",
+            "description": "候选人直接确认合规时间，减少来回邮件确认，让流程更顺滑。",
             "icon": "RiDatabase2Line",
             "image": {
               "src": "/imgs/features/2.png",
-              "alt": "introduce"
+              "alt": "候选人自助预约"
             }
           },
           {
-            "title": "极速部署",
-            "description": "AI SaaS 产品快速上线，助力小时级交付。",
+            "title": "异常处理",
+            "description": "在改期和爽约场景下，先自动补约一次，再把复杂情况升级给 recruiter。",
             "icon": "RiCloudyFill",
             "image": {
               "src": "/imgs/features/3.png",
-              "alt": "introduce"
+              "alt": "异常处理"
             }
           },
           {
-            "title": "AI 集成",
-            "description": "通过内置的 AI SDK，轻松为你的项目集成 AI 能力。",
+            "title": "Agent 决策可见",
+            "description": "把推荐逻辑、风险提示和下一步动作呈现出来，让这个 agent 看起来可信而不是“黑盒”。",
             "icon": "RiRobot2Line",
             "image": {
               "src": "/imgs/features/4.png",
-              "alt": "introduce"
+              "alt": "Agent 决策可见"
             }
           }
         ],
@@ -153,35 +156,35 @@
       "benefits": {
         "block": "features-accordion",
         "id": "benefits",
-        "title": "为何选择 ShipAny",
-        "label": "产品优势",
-        "description": "你获得一切 AI 创业所需——从开箱即用的模板到专业技术支持。",
+        "title": "为什么这个场景适合作为第一类 AI Agent 产品",
+        "label": "为什么可行",
+        "description": "它既有足够清晰的规则边界，又有足够真实的业务价值，所以很适合在面试里展示“产品判断 + agent workflow 设计能力”。",
         "items": [
           {
-            "title": "全栈解决方案",
-            "description": "基于 Next.js，集成认证、支付、AI，一站式开箱即用。",
+            "title": "规则清晰",
+            "description": "可用时间、时区换算、轮次顺序、爽约升级策略都可以被明确建模和解释。",
             "icon": "RiNextjsFill",
             "image": {
               "src": "/imgs/features/user-billing.png",
-              "alt": "benefits"
+              "alt": "规则清晰"
             }
           },
           {
-            "title": "丰富模板库",
-            "description": "多样的 AI SaaS 模板，点击即用，涵盖聊天、图像生成等多场景。",
+            "title": "高频又低价值的行政工作",
+            "description": "recruiter 在排期协调上花了大量时间，但这并不是最需要人工判断的部分。",
             "icon": "RiClapperboardAiLine",
             "image": {
               "src": "/imgs/features/admin-settings.png",
-              "alt": "benefits"
+              "alt": "高频行政工作"
             }
           },
           {
-            "title": "专属技术指导",
-            "description": "享受专属技术支持与开发者社区，为你的成功保驾护航。",
+            "title": "直接影响候选人体验",
+            "description": "排期慢、沟通乱、改期不及时，都会让高质量候选人在真正进入面试前就流失。",
             "icon": "RiCodeFill",
             "image": {
               "src": "/imgs/features/landing-page.png",
-              "alt": "benefits"
+              "alt": "候选人体验"
             }
           }
         ]
@@ -189,233 +192,204 @@
       "usage": {
         "block": "features-step",
         "id": "usage",
-        "title": "三步使用 ShipAny 极速上线",
-        "description": "只需三步，快速开启你的 AI SaaS 创业之路：",
+        "title": "面试官可以在 3 分钟内验证的几个关键点",
+        "label": "演示路径",
+        "description": "这个首页不是普通的营销页，而是为了让面试官点几下就能感受到你的业务理解、流程设计和产品成熟度。",
         "image": {
           "src": "/imgs/features/1.png",
-          "alt": "usage"
+          "alt": "演示路径"
         },
         "image_position": "left",
         "text_align": "center",
         "items": [
           {
-            "title": "获取 ShipAny",
-            "description": "一次性购买 ShipAny，查收邮件获取代码与文档。",
-            "image": {
-              "src": "/imgs/features/5.png",
-              "alt": "usage"
-            }
+            "title": "加载一个真实感场景",
+            "description": "从候选人、职位、时区、SLA 和市场组合出发，快速进入一个像真实招聘运营的上下文。"
           },
           {
-            "title": "启动你的项目",
-            "description": "阅读说明文档，克隆 ShipAny 代码，开始开发你的 AI SaaS 项目。",
-            "image": {
-              "src": "/imgs/features/6.png",
-              "alt": "usage"
-            }
+            "title": "查看排期推荐路径",
+            "description": "验证多轮面试如何被串起来，以及为什么这个推荐时间是当前最优解。"
           },
           {
-            "title": "个性化定制",
-            "description": "根据需求修改模板内容和数据，配置专属 AI 能力。",
-            "image": {
-              "src": "/imgs/features/7.png",
-              "alt": "usage"
-            }
+            "title": "切到候选人侧视角",
+            "description": "看候选人只会看到少量合规时间，而不是内部的协调复杂度。"
           },
           {
-            "title": "部署上线",
-            "description": "简单几步将你的项目推向生产环境，立刻为客户提供服务。",
-            "image": {
-              "src": "/imgs/features/8.png",
-              "alt": "usage"
-            }
+            "title": "模拟异常恢复",
+            "description": "通过改期和爽约恢复，体现 agent 不只是排期器，而是一个完整 workflow owner。"
           }
         ],
         "className": "bg-muted"
       },
       "features": {
         "id": "features",
-        "title": "ShipAny 核心功能",
-        "description": "一切你需要的工具，助力 AI SaaS 项目高效上线。",
+        "title": "当前 MVP 已经体现出的核心能力",
+        "description": "这些能力都直接对应招聘排期中的真实问题，而不是为了看起来“像 AI 产品”而堆出来的功能。",
         "items": [
           {
-            "title": "Next.js 项目模板",
-            "description": "生产就绪、支持 SEO 与多语言的 Next.js 脚手架。",
+            "title": "多轮面试串联",
+            "description": "按照轮次顺序和负责人规则生成完整的面试路径。",
             "icon": "RiNextjsFill"
           },
           {
-            "title": "身份认证与支付",
-            "description": "集成谷歌 OAuth、一键登录，以及 Stripe 支付。",
+            "title": "时区安全的时间推荐",
+            "description": "显式呈现候选人时间和面试官时间，降低跨区安排出错的概率。",
             "icon": "RiKey2Fill"
           },
           {
-            "title": "数据基础设施",
-            "description": "内置 Supabase，稳定可靠的数据存储。",
+            "title": "备选时间覆盖",
+            "description": "每一轮都保留 fallback 选项，便于在冲突发生时快速恢复。",
             "icon": "RiDatabase2Line"
           },
           {
-            "title": "一键部署",
-            "description": "自动化部署到 Vercel 或 Cloudflare，极速上线。",
+            "title": "候选人自助预约",
+            "description": "让候选人自己确认合规时间，减少 recruiter 反复沟通。",
             "icon": "RiCloudy2Fill"
           },
           {
-            "title": "商业分析",
-            "description": "集成 Google Analytics、Search Console，助力业务增长。",
+            "title": "规划摘要输出",
+            "description": "把当前排期状态转成 recruiter 能直接理解和使用的 briefing、next actions 与风险提示。",
             "icon": "RiBarChart2Line"
           },
           {
-            "title": "AI 原生基础设施",
-            "description": "预置 AI 集成、积分系统和 API 售卖能力。",
+            "title": "Google 登录展示",
+            "description": "保留登录能力，体现这是一个成熟 SaaS 产品，而不是一次性静态页面。",
             "icon": "RiRobot2Line"
           }
         ]
       },
       "stats": {
         "id": "stats",
-        "title": "用户喜爱 ShipAny",
-        "description": "因其易用且上线飞快。",
+        "title": "让面试官快速感受到这是一个“有产品思考”的原型",
+        "description": "数字不只是装饰，而是在帮助你更快讲清楚这个产品的边界和价值。",
         "items": [
           {
-            "title": "999+",
-            "description": "位用户"
+            "title": "3",
+            "description": "个核心面：招聘控制台、候选人预约、异常处理"
           },
           {
-            "title": "200+",
-            "description": "组件块"
+            "title": "24h",
+            "description": "示意性的排期 SLA，可直接体现在控制台里"
           },
           {
-            "title": "50+",
-            "description": "专业模板"
+            "title": "1",
+            "description": "次自动恢复机会，之后再升级给 recruiter"
           }
         ],
         "className": "bg-muted"
       },
       "testimonials": {
         "id": "testimonials",
-        "title": "用户对 ShipAny 的评价",
-        "description": "听听开发者与创始人用 ShipAny 快速上线 AI 创业项目的故事。",
+        "title": "不同角色会如何理解这个产品价值",
+        "description": "这一组内容的目的不是做营销，而是帮你在面试中更快切换到业务语言。",
         "items": [
           {
-            "name": "David Chen",
-            "role": "AIWallpaper.shop 创始人",
-            "quote": "ShipAny 为我们节省了数月开发时间。2 天上线 AI 壁纸业务，一周内就收到了第一笔付费订单！",
+            "name": "Amelia Chen",
+            "role": "招聘运营负责人",
+            "quote": "这个方案最强的地方是，它替 recruiter 吃掉了协调成本，但并没有把决策逻辑藏起来。",
             "image": {
               "src": "/imgs/avatars/1.png",
-              "alt": "david"
+              "alt": "Amelia Chen"
+            }
+          },
+          {
+            "name": "Marcus Lee",
+            "role": "资深 Recruiter",
+            "quote": "我可以一眼看到 fallback、SLA 压力和当前最优安排路径，这让这个控制台看起来很像真实系统。",
+            "image": {
+              "src": "/imgs/avatars/2.png",
+              "alt": "Marcus Lee"
+            }
+          },
+          {
+            "name": "Sofia Martinez",
+            "role": "候选人体验负责人",
+            "quote": "候选人侧界面足够简单，说明这个产品真正理解了谁不该看到复杂度。",
+            "image": {
+              "src": "/imgs/avatars/3.png",
+              "alt": "Sofia Martinez"
+            }
+          },
+          {
+            "name": "David Wu",
+            "role": "TA Systems Partner",
+            "quote": "这是一个很好的 agent 落地点，因为可以先验证流程，再逐步接 ATS、Calendar 和消息渠道。",
+            "image": {
+              "src": "/imgs/avatars/4.png",
+              "alt": "David Wu"
             }
           },
           {
             "name": "Rachel Kim",
-            "role": "HeyBeauty.ai CTO",
-            "quote": "内置 AI 基础设施颠覆了开发体验，无需担心架构，只需专注核心功能，极快落地。",
-            "image": {
-              "src": "/imgs/avatars/2.png",
-              "alt": "rachel"
-            }
-          },
-          {
-            "name": "Marcus Thompson",
-            "role": "独立开发者",
-            "quote": "作为独立开发者，ShipAny 满足了全部需求——认证、支付、AI 集成、美观界面，一个周末上线 SaaS！",
-            "image": {
-              "src": "/imgs/avatars/3.png",
-              "alt": "marcus"
-            }
-          },
-          {
-            "name": "Sofia Garcia",
-            "role": "Melodisco CEO",
-            "quote": "模板高度可定制且生产级。我们几小时内搭建出了 AI 音乐平台，上市周期大大缩短！",
-            "image": {
-              "src": "/imgs/avatars/4.png",
-              "alt": "sofia"
-            }
-          },
-          {
-            "name": "James Wilson",
-            "role": "GPTs.works 技术负责人",
-            "quote": "ShipAny 基础设施极其稳定。我们从 0 到 1 万用户，无需关心后端维护，是最棒的 AI 创业投资。",
+            "role": "用人经理",
+            "quote": "我喜欢它没有夸张地说自己能决定招聘结果，而是专注在减少流程摩擦，这更可信。",
             "image": {
               "src": "/imgs/avatars/5.png",
-              "alt": "james"
+              "alt": "Rachel Kim"
             }
           },
           {
-            "name": "Anna Zhang",
-            "role": "创业者",
-            "quote": "从想法到上线，仅用 3 天！ShipAny 模板和部署工具让我们极快验证 AI 商业创意。",
+            "name": "Noah Thompson",
+            "role": "产品面试官",
+            "quote": "点几下就能看出你对业务流程、agent 边界和产品成熟度的理解，这是一个很适合面试展示的方向。",
             "image": {
               "src": "/imgs/avatars/6.png",
-              "alt": "anna"
+              "alt": "Noah Thompson"
             }
           }
         ]
       },
       "faq": {
         "id": "faq",
-        "title": "关于 ShipAny 的常见问题",
-        "description": "还有其他问题？欢迎加入 Discord 或发邮件联系我们。",
+        "title": "面试官大概率会问的问题",
+        "description": "这些回答的目标是帮助你把这个产品讲得既有深度，又不显得过度承诺。",
+        "tip": "如果对方想看得更细，可以直接回到上方 demo，现场演示推荐时间、候选人选时和爽约恢复。",
         "items": [
           {
-            "question": "ShipAny 是什么？怎么帮到我？",
-            "answer": "ShipAny 是专为 AI SaaS 创业设计的 NextJS 全套脚手架，内含开箱即用的模板、基础设施搭建和部署工具，让你数小时内上线 AI 产品。"
+            "question": "为什么选面试安排作为第一个 agent 场景？",
+            "answer": "因为它规则清晰、发生频率高、业务价值直接可见，而且不需要一开始就让 agent 介入高风险判断。"
           },
           {
-            "question": "使用 ShipAny 需要很高的技术水平吗？",
-            "answer": "有基础编程知识即可上手。ShipAny 面向开发者友好，详细文档和模板让初学者也能轻松起步，不需深厚 AI 或云计算背景。"
+            "question": "哪些部分是 AI，哪些部分是规则？",
+            "answer": "时间推荐本身是规则驱动和可解释的，AI 主要负责生成摘要、通知文案和风险 framing，这样更可信。"
           },
           {
-            "question": "ShipAny 支持哪些类型的 AI SaaS 项目？",
-            "answer": "ShipAny 支持内容生成、数据分析、AI 聊天机器人、图片/内容生成器等多种主流 AI 应用场景。"
+            "question": "候选人为什么不需要看到全部复杂逻辑？",
+            "answer": "因为候选人真正需要的是少量清晰可选时间，而不是内部面试官协调、时区权衡和回退策略。"
           },
           {
-            "question": "用 ShipAny 一般多久能上线？",
-            "answer": "借助 ShipAny，可在数小时内拿到产品原型并上线生产环境，预配置的一键部署大幅缩短开发周期。"
+            "question": "异常处理在这个 MVP 里体现到什么程度？",
+            "answer": "当前设计是先自动补约一次，如果仍然复杂或约束冲突，就升级给 recruiter 处理。"
           },
           {
-            "question": "ShipAny 的基础设施包括哪些内容？",
-            "answer": "包含认证、数据库、API 集成、支付、云端部署等全栈解决方案，全部遵循业界最佳实践预配置。"
+            "question": "这个版本已经接 ATS 和日历了吗？",
+            "answer": "面试展示版本没有接真实系统，而是用高质量 mock 数据来验证产品流程、信息结构和工作流设计。"
           },
           {
-            "question": "模板是否支持定制自己的品牌？",
-            "answer": "当然支持！所有模板均可自定义设计、功能和品牌，既保持基础架构稳定，又能满足个性扩展需求。"
+            "question": "为什么保留 Google 登录，但登录前后功能又没有差别？",
+            "answer": "因为这个阶段的目标是让面试官知道你已经考虑了 SaaS 产品的基础能力，但又不希望登录门槛打断体验。"
           }
         ]
       },
       "cta": {
         "id": "cta",
-        "title": "发布你的第一个 AI SaaS 项目",
-        "description": "从这里出发，用 ShipAny 极速交付。",
+        "title": "用 5 分钟把整个产品讲清楚",
+        "description": "打开 live demo，切换几个场景，运行 agent briefing，再点一下 Google 登录，就能把你的产品判断和落地能力完整展示出来。",
         "buttons": [
           {
-            "title": "获取 ShipAny",
-            "url": "https://shipany.ai",
-            "target": "_blank",
+            "title": "查看产品演示",
+            "url": "/#demo",
+            "target": "_self",
             "icon": "Zap"
           },
           {
-            "title": "阅读文档",
-            "url": "/docs",
-            "target": "_blank",
+            "title": "Google 登录",
+            "url": "/sign-in",
+            "target": "_self",
             "variant": "outline",
             "icon": "BookOpenText"
           }
         ],
-        "className": "bg-muted"
-      },
-      "subscribe": {
-        "id": "subscribe",
-        "title": "订阅我们的邮件通知",
-        "description": "获取 ShipAny 最新资讯与产品动态。",
-        "submit": {
-          "input": {
-            "placeholder": "输入邮箱"
-          },
-          "button": {
-            "title": "订阅"
-          },
-          "action": "/api/subscribe"
-        },
         "className": "bg-muted"
       }
     }

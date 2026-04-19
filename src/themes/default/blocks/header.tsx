@@ -94,9 +94,9 @@ export function Header({ header }: { header: HeaderType }) {
                   <Link
                     href={item.url || ''}
                     target={item.target || '_self'}
-                    className={`flex flex-row items-center gap-2 px-4 py-1.5 text-sm ${
+                    className={`flex flex-row items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-background/80 hover:text-foreground ${
                       item.is_active || pathname.endsWith(item.url as string)
-                        ? 'bg-muted/40 text-muted-foreground'
+                        ? 'bg-primary/10 text-foreground'
                         : ''
                     }`}
                   >
@@ -109,7 +109,7 @@ export function Header({ header }: { header: HeaderType }) {
 
             return (
               <NavigationMenuItem key={idx}>
-                <NavigationMenuTrigger className="flex flex-row items-center gap-2 text-sm">
+                <NavigationMenuTrigger className="flex flex-row items-center gap-2 rounded-full text-sm font-medium text-foreground/80 hover:bg-background/80 hover:text-foreground">
                   {item.icon && (
                     <SmartIcon name={item.icon as string} className="h-4 w-4" />
                   )}
@@ -253,8 +253,8 @@ export function Header({ header }: { header: HeaderType }) {
       >
         <div
           className={cn(
-            'absolute inset-x-0 top-0 z-50 h-18 border-transparent ring-1 ring-transparent transition-all duration-300',
-            'in-data-scrolled:border-foreground/5 in-data-scrolled:bg-background/75 in-data-scrolled:border-b in-data-scrolled:backdrop-blur',
+            'absolute inset-x-0 top-0 z-50 h-18 border-b border-foreground/8 bg-background/82 shadow-sm shadow-black/5 ring-1 ring-transparent backdrop-blur-md transition-all duration-300',
+            'in-data-scrolled:border-foreground/10 in-data-scrolled:bg-background/90 in-data-scrolled:shadow-md in-data-scrolled:shadow-black/8',
             'has-data-[state=open]:ring-foreground/5 has-data-[state=open]:bg-card/75 has-data-[state=open]:h-[calc(var(--navigation-menu-viewport-height)+3.4rem)] has-data-[state=open]:border-b has-data-[state=open]:shadow-lg has-data-[state=open]:shadow-black/10 has-data-[state=open]:backdrop-blur',
             'max-lg:in-data-[state=active]:bg-background/75 max-lg:h-14 max-lg:overflow-hidden max-lg:border-b max-lg:in-data-[state=active]:h-screen max-lg:in-data-[state=active]:backdrop-blur'
           )}

@@ -53,6 +53,90 @@
     "running_agent": "Running Agent...",
     "reset": "Reset"
   },
+  "hero": {
+    "eyebrow": "Interview Operations Demo",
+    "title": "A recruiter control tower with candidate self-scheduling and exception recovery built in.",
+    "description": "This demo is designed for interviews: realistic scenarios, visible scheduling logic, and enough product polish to feel like a mature SaaS workflow instead of a static mockup.",
+    "highlights": [
+      "ATS-triggered intake",
+      "Deterministic slot ranking",
+      "Candidate self-scheduling",
+      "One-click no-show recovery"
+    ],
+    "actions": {
+      "run_agent": "Generate briefing",
+      "auto_book": "Auto-book top path",
+      "reset": "Reset workspace"
+    },
+    "stats": {
+      "sla": "SLA target",
+      "cross_timezone": "Cross-timezone rounds",
+      "fallback": "Fallback coverage",
+      "candidate_fit": "Candidate-friendly fit"
+    },
+    "summary": {
+      "candidate": "Candidate",
+      "role": "Role",
+      "priority": "Priority",
+      "automation": "Automation"
+    }
+  },
+  "demo_scenarios": {
+    "title": "Demo scenarios",
+    "description": "Load a realistic hiring situation so the interviewer can quickly see why the workflow behaves the way it does.",
+    "active_label": "Loaded",
+    "items": [
+      {
+        "id": "campus_apac",
+        "title": "Campus hiring across APAC",
+        "badge": "Campus hiring",
+        "summary": "An APAC intern pipeline that needs same-week turnaround while keeping the candidate inside daytime-friendly interview windows.",
+        "candidate_name": "Qiwen Yuan",
+        "candidate_email": "qiwen@example.com",
+        "candidate_timezone": "Asia/Singapore",
+        "job_title": "Talent Management Strategy Intern",
+        "notes": "Candidate prefers weekday daytime interviews and can do all rounds this week.",
+        "sla": "24h",
+        "markets": "Shanghai, Singapore, London",
+        "priority": "Same-week close",
+        "automation": "Agent pre-holds backup panels"
+      },
+      {
+        "id": "global_pm",
+        "title": "Global PM loop with tight overlap",
+        "badge": "Global PM",
+        "summary": "A senior PM interview loop where recruiter, hiring manager, and panelists sit in different regions and overlap windows are limited.",
+        "candidate_name": "Sofia Martinez",
+        "candidate_email": "sofia.martinez@example.com",
+        "candidate_timezone": "America/New_York",
+        "job_title": "Senior Product Manager",
+        "notes": "Candidate can only interview during morning ET. Hiring manager wants all rounds completed before Friday.",
+        "sla": "36h",
+        "markets": "New York, Singapore, London",
+        "priority": "Tight overlap windows",
+        "automation": "Auto-rank shared overlap slots"
+      },
+      {
+        "id": "recovery_exec",
+        "title": "Late-stage reschedule recovery",
+        "badge": "Recovery path",
+        "summary": "A near-final-round candidate requested a last-minute change. The system should recover once automatically before escalating back to recruiting.",
+        "candidate_name": "Daniel Wu",
+        "candidate_email": "daniel.wu@example.com",
+        "candidate_timezone": "Asia/Shanghai",
+        "job_title": "Go-to-Market Strategy Lead",
+        "notes": "Candidate can rejoin after 3pm CST. Preserve interviewer sequence and offer one auto-rebook before recruiter escalation.",
+        "sla": "12h",
+        "markets": "Shanghai, Sydney",
+        "priority": "Recovery before escalation",
+        "automation": "One-time auto-rebook"
+      }
+    ]
+  },
+  "intake": {
+    "title": "Scheduling intake workspace",
+    "description": "A recruiter-facing workspace for candidate constraints, role context, SLA pressure, and scenario setup before the agent runs."
+  },
   "planner": {
     "title": "AI Planner Output",
     "description": "Run the agent to generate a recruiter-ready summary, messaging drafts, and operational risks.",
@@ -60,6 +144,18 @@
     "next_actions": "Next actions",
     "risks": "Risks to monitor",
     "placeholder": "Run the agent to generate this section.",
+    "demo": {
+      "summary": "{candidate} now has {rounds} recommended rounds, with {crossTimezone} cross-timezone handoffs and fallback coverage on {fallback} stages.",
+      "recruiter_brief": "Start with {firstStage} at {firstTime}, then keep the loop moving until {lastTime}. Current scheduling SLA target is {sla}.",
+      "candidate_confirmation": "Hi {candidate}, your {role} interview plan is ready. You can confirm one of the recommended options and move through all {rounds} rounds without recruiter email ping-pong.",
+      "interviewer_reminder": "Share the structured brief with interviewers for the {role} loop and keep fallback slots reserved until the candidate confirms.",
+      "next_action_share": "Share the first {firstStage} option with the candidate at {time}.",
+      "next_action_hold": "Hold fallback capacity for {sla} so recruiter intervention stays low.",
+      "next_action_monitor": "Monitor for reschedule or no-show signals and trigger one automatic recovery flow before escalation.",
+      "risk_timezone": "Cross-timezone overlap is still the primary scheduling constraint in this scenario.",
+      "risk_fallback": "One or more rounds have shallow fallback depth. Keep backup holds active until the candidate confirms.",
+      "risk_constraints": "Candidate preferences and interviewer availability are currently aligned, but any change should reopen slot scoring."
+    },
     "errors": {
       "generic": "Failed to generate the interview plan"
     }
@@ -94,13 +190,13 @@
     "no_show_policy_title": "No-show policy",
     "no_show_policy_body": "If the candidate misses the interview, the agent offers one automatic rebooking opportunity using the next best compliant slot. Further exceptions escalate to a recruiter."
   },
-  "dashboard": {
-    "title": "Agent Dashboard",
-    "description": "A simplified control tower for recruiter operations.",
-    "stages_configured": "Stages Configured",
-    "booked": "Booked",
-    "interviewers": "Interviewers",
-    "candidate_timezone": "Candidate TZ"
+  "operations": {
+    "title": "Operations snapshot",
+    "description": "A compact business view of the current scenario so interviewers can read urgency, coverage, and market complexity immediately.",
+    "sla": "Scheduling SLA",
+    "priority": "Priority",
+    "fallback_coverage": "Fallback coverage",
+    "markets": "Markets"
   },
   "guide": {
     "title": "How this upgraded prototype works",
@@ -122,7 +218,7 @@
         },
         {
           "title": "3. Candidate self-scheduling",
-          "description": "Candidate receives 3–5 compliant time options and confirms one without recruiter back-and-forth."
+          "description": "Candidate receives 3 to 5 compliant time options and confirms one without recruiter back-and-forth."
         },
         {
           "title": "4. Confirmation & reminder",
@@ -145,21 +241,21 @@
     },
     "actions": {
       "items": [
-        "• Match calendars",
-        "• Convert time zones",
-        "• Chain multi-round interviews",
-        "• Let candidates self-schedule",
-        "• Auto-reschedule and handle one no-show recovery",
-        "• Trigger reminders in a production version"
+        "Match calendars",
+        "Convert time zones",
+        "Chain multi-round interviews",
+        "Let candidates self-schedule",
+        "Auto-reschedule and handle one no-show recovery",
+        "Trigger reminders in a production version"
       ]
     },
     "next": {
       "intro": "For a real production agent, connect this UI to:",
       "items": [
-        "• ATS / CRM (Greenhouse, Lever, Workday)",
-        "• Calendar APIs (Google / Outlook)",
-        "• Communication channels (Email, SMS, WhatsApp, WeCom)",
-        "• Rules engine for interviewer assignment and escalation"
+        "ATS / CRM (Greenhouse, Lever, Workday)",
+        "Calendar APIs (Google / Outlook)",
+        "Communication channels (Email, SMS, WhatsApp, WeCom)",
+        "Rules engine for interviewer assignment and escalation"
       ]
     }
   },
@@ -168,12 +264,17 @@
     "footer": "This prototype demonstrates workflow logic for scheduling, self-booking, reminders, and no-show recovery. In production, the agent would also create meeting links, sync ATS status, record exceptions, and escalate complex cases to a recruiter.",
     "ready": "Agent ready: waiting for candidate details and stage rules.",
     "reset": "Agent reset. Waiting for the next scheduling run.",
+    "scenario_loaded": "Loaded scenario: {scenario}.",
+    "auto_booked_path": "Auto-booked the highest-confidence path across all available rounds.",
     "run": {
       "read_profile": "Read candidate profile for {candidate} ({role}).",
       "detect_timezone": "Detected candidate timezone: {timezone}.",
       "checked_calendars": "Checked interviewer calendars and applied working-hour constraints.",
-      "sequenced_rounds": "Sequenced multi-round interview plan with preferred earliest-fit logic.",
-      "generated_options": "Generated self-scheduling options, reminders, and fallback reschedule options."
+      "sequenced_rounds": "Sequenced the multi-round interview plan using earliest-fit logic.",
+      "cross_timezone_handoffs": "Found {count} rounds that require cross-timezone coordination.",
+      "same_region_fit": "Primary sequence stays within closely aligned working hours.",
+      "generated_options": "Generated self-scheduling options, reminders, and fallback reschedule options.",
+      "demo_briefing": "Generated a demo-safe recruiter brief and fallback messaging without requiring live integrations."
     },
     "candidate_selected": "Candidate selected {stage} with {interviewer} at {time} ({timezone}).",
     "recruiter_booked": "Booked {stage} with {interviewer} at {time} ({timezone}).",

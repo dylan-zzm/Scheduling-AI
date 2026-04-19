@@ -53,6 +53,90 @@
     "running_agent": "Agent 运行中...",
     "reset": "重置"
   },
+  "hero": {
+    "eyebrow": "招聘运营演示",
+    "title": "一个同时覆盖招聘控制台、候选人自助预约和异常恢复的排期产品演示。",
+    "description": "这个 demo 是为了面试场景设计的：有真实感场景、有可解释的排期逻辑，也有足够成熟的产品外观，而不是一个只能看的静态页面。",
+    "highlights": [
+      "ATS 触发式 intake",
+      "规则驱动的时间排序",
+      "候选人自助预约",
+      "一键爽约恢复"
+    ],
+    "actions": {
+      "run_agent": "生成摘要",
+      "auto_book": "一键自动排完整路径",
+      "reset": "重置工作区"
+    },
+    "stats": {
+      "sla": "SLA 目标",
+      "cross_timezone": "跨时区轮次",
+      "fallback": "备选覆盖率",
+      "candidate_fit": "候选人友好度"
+    },
+    "summary": {
+      "candidate": "候选人",
+      "role": "职位",
+      "priority": "优先级",
+      "automation": "自动化策略"
+    }
+  },
+  "demo_scenarios": {
+    "title": "演示场景",
+    "description": "加载不同招聘上下文，让面试官快速看到这个工作流为什么会这样决策。",
+    "active_label": "已加载",
+    "items": [
+      {
+        "id": "campus_apac",
+        "title": "APAC 校招场景",
+        "badge": "校园招聘",
+        "summary": "一个需要在一周内完成的 APAC 实习生流程，要求候选人时间友好，同时满足跨区域面试官参与。",
+        "candidate_name": "Qiwen Yuan",
+        "candidate_email": "qiwen@example.com",
+        "candidate_timezone": "Asia/Singapore",
+        "job_title": "Talent Management Strategy Intern",
+        "notes": "候选人偏好工作日白天面试，本周内可完成全部轮次。",
+        "sla": "24h",
+        "markets": "上海、新加坡、伦敦",
+        "priority": "本周内完成",
+        "automation": "Agent 预留备选 panel"
+      },
+      {
+        "id": "global_pm",
+        "title": "全球 PM 面试环",
+        "badge": "全球 PM",
+        "summary": "候选人、recruiter 和面试官分布在多个地区，可重叠时间很少，时区是主要限制条件。",
+        "candidate_name": "Sofia Martinez",
+        "candidate_email": "sofia.martinez@example.com",
+        "candidate_timezone": "America/New_York",
+        "job_title": "Senior Product Manager",
+        "notes": "候选人只能接受美东上午时间。用人经理希望所有轮次在周五前完成。",
+        "sla": "36h",
+        "markets": "纽约、新加坡、伦敦",
+        "priority": "重叠窗口很紧",
+        "automation": "自动排序共享重叠时段"
+      },
+      {
+        "id": "recovery_exec",
+        "title": "末轮改期恢复",
+        "badge": "恢复路径",
+        "summary": "候选人在接近终面的阶段提出临时改期，系统需要先自动恢复一次，再决定是否升级给 recruiter。",
+        "candidate_name": "Daniel Wu",
+        "candidate_email": "daniel.wu@example.com",
+        "candidate_timezone": "Asia/Shanghai",
+        "job_title": "Go-to-Market Strategy Lead",
+        "notes": "候选人下午 3 点后可参加。需要保留原面试官顺序，并先提供一次自动补约。",
+        "sla": "12h",
+        "markets": "上海、悉尼",
+        "priority": "先恢复再升级",
+        "automation": "一次性自动补约"
+      }
+    ]
+  },
+  "intake": {
+    "title": "排期 intake 工作区",
+    "description": "给 recruiter 一个用于设置候选人约束、职位上下文、SLA 压力和演示场景的工作台。"
+  },
   "planner": {
     "title": "AI 规划输出",
     "description": "运行 Agent 后，会生成可直接给招聘方使用的摘要、通知草稿和风险提示。",
@@ -60,6 +144,18 @@
     "next_actions": "下一步动作",
     "risks": "需要关注的风险",
     "placeholder": "运行 Agent 后会生成此部分内容。",
+    "demo": {
+      "summary": "{candidate} 当前有 {rounds} 轮推荐安排，其中 {crossTimezone} 轮涉及跨时区协同，并且 {fallback} 个轮次保留了 fallback 备选。",
+      "recruiter_brief": "建议从 {firstStage} 开始，时间为 {firstTime}，并将后续轮次推进到 {lastTime} 前完成。当前排期 SLA 目标为 {sla}。",
+      "candidate_confirmation": "你好 {candidate}，你的 {role} 面试安排已准备好。你可以直接确认推荐时间，在无需 recruiter 来回沟通的情况下完成全部 {rounds} 轮。",
+      "interviewer_reminder": "请将结构化摘要同步给 {role} 相关面试官，并在候选人确认前保留 fallback 时间。",
+      "next_action_share": "先把 {firstStage} 的候选时间 {time} 发给候选人确认。",
+      "next_action_hold": "在 {sla} 内保留备选面试官和时间，尽量减少 recruiter 介入。",
+      "next_action_monitor": "持续监听改期或爽约信号，并在升级前触发一次自动恢复流程。",
+      "risk_timezone": "当前场景下，跨时区重叠窗口仍然是主要限制因素。",
+      "risk_fallback": "部分轮次的 fallback 深度较浅，在候选人确认前需要保留备选资源。",
+      "risk_constraints": "当前候选人偏好与面试官可用时间仍然对齐，但任何变化都应重新触发时间打分。"
+    },
     "errors": {
       "generic": "生成面试计划失败"
     }
@@ -94,13 +190,13 @@
     "no_show_policy_title": "爽约处理策略",
     "no_show_policy_body": "若候选人缺席，Agent 会自动提供一次基于下一个最佳合规时间的补约机会；若仍有异常，将升级给招聘专员处理。"
   },
-  "dashboard": {
-    "title": "Agent 仪表盘",
-    "description": "一个更适合招聘运营的简化控制台。",
-    "stages_configured": "已配置轮次",
-    "booked": "已安排",
-    "interviewers": "面试官数",
-    "candidate_timezone": "候选人时区"
+  "operations": {
+    "title": "运营快照",
+    "description": "用更业务化的方式展示当前场景的紧急程度、覆盖情况和市场复杂度，让面试官一眼看懂。 ",
+    "sla": "排期 SLA",
+    "priority": "优先级",
+    "fallback_coverage": "备选覆盖率",
+    "markets": "涉及市场"
   },
   "guide": {
     "title": "这个升级版原型如何工作",
@@ -145,21 +241,21 @@
     },
     "actions": {
       "items": [
-        "• 匹配日历",
-        "• 转换时区",
-        "• 串联多轮面试",
-        "• 支持候选人自助预约",
-        "• 自动改期并处理一次爽约恢复",
-        "• 在生产环境中触发提醒"
+        "匹配日历",
+        "转换时区",
+        "串联多轮面试",
+        "支持候选人自助预约",
+        "自动改期并处理一次爽约恢复",
+        "在生产环境中触发提醒"
       ]
     },
     "next": {
       "intro": "如果要做成真实生产系统，这个界面还需要连接：",
       "items": [
-        "• ATS / CRM（Greenhouse、Lever、Workday）",
-        "• 日历 API（Google / Outlook）",
-        "• 沟通渠道（Email、SMS、WhatsApp、企业微信）",
-        "• 面试官分配与升级处理规则引擎"
+        "ATS / CRM（Greenhouse、Lever、Workday）",
+        "日历 API（Google / Outlook）",
+        "沟通渠道（Email、SMS、WhatsApp、企业微信）",
+        "面试官分配与升级处理规则引擎"
       ]
     }
   },
@@ -168,12 +264,17 @@
     "footer": "这个原型展示了排期、自助预约、提醒与爽约恢复的工作流逻辑。在生产环境中，Agent 还会创建会议链接、同步 ATS 状态、记录异常，并在复杂场景下升级给招聘专员。",
     "ready": "Agent 已就绪：等待候选人资料与轮次规则。",
     "reset": "Agent 已重置，等待下一次排期运行。",
+    "scenario_loaded": "已加载场景：{scenario}。",
+    "auto_booked_path": "已自动安排当前最高置信度的完整排期路径。",
     "run": {
       "read_profile": "已读取候选人资料：{candidate}（{role}）。",
       "detect_timezone": "已识别候选人时区：{timezone}。",
       "checked_calendars": "已检查面试官日历并应用工作时间约束。",
       "sequenced_rounds": "已按最早可行原则生成多轮面试顺序方案。",
-      "generated_options": "已生成候选人自助预约选项、提醒方案与改期备选时间。"
+      "cross_timezone_handoffs": "发现 {count} 轮需要跨时区协调。",
+      "same_region_fit": "当前主路径基本落在相近工作时间内。",
+      "generated_options": "已生成候选人自助预约选项、提醒方案与改期备选时间。",
+      "demo_briefing": "已生成适合演示环境的 recruiter 摘要与 fallback 文案，无需依赖真实集成。"
     },
     "candidate_selected": "候选人已为 {stage} 选择 {interviewer}，时间为 {time}（{timezone}）。",
     "recruiter_booked": "已为 {stage} 安排 {interviewer}，时间为 {time}（{timezone}）。",

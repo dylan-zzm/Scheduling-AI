@@ -19,23 +19,22 @@ export default async function LandingPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations('ai.interview_scheduler');
+  const ai = await getTranslations('ai.interview_scheduler');
+  const t = await getTranslations('pages.index');
 
-  const page: DynamicPage = {
-    title: t('page.title'),
-    description: t('page.description'),
-    show_sections: ['scheduler'],
-    sections: {
-      scheduler: {
-        id: 'scheduler',
-        component: (
-          <InterviewSchedulerAgent
-            srOnlyTitle={t('page.title')}
-            className="pt-20 md:pt-24"
-          />
-        ),
-      },
-    },
+  const page: DynamicPage = t.raw('page');
+  page.title = ai('page.title');
+  page.description = ai('page.description');
+  page.sections = page.sections || {};
+  page.sections.hero = {
+    ...(page.sections.hero || {}),
+    id: 'hero',
+    component: (
+      <InterviewSchedulerAgent
+        srOnlyTitle={ai('page.title')}
+        className="pt-20 md:pt-24"
+      />
+    ),
   };
 
   const Page = await getThemePage('dynamic-page');

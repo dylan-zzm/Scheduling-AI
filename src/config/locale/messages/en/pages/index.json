@@ -1,5 +1,7 @@
 {
   "page": {
+    "title": "Interview Scheduling AI Agent",
+    "description": "A polished SaaS-style product demo for recruiter scheduling operations, candidate self-scheduling, and exception handling.",
     "show_sections": [
       "hero",
       "logos",
@@ -15,54 +17,54 @@
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "Ship AI Startups in hours, not days",
-        "highlight_text": "in hours",
-        "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups.<br/>Ship Fast with a variety of templates and components.",
+        "title": "Interview scheduling that feels instant to candidates and invisible to recruiters",
+        "highlight_text": "instant",
+        "description": "An AI recruiting workflow that reads stage rules, matches calendars, converts time zones, and handles reschedules without recruiter back-and-forth.",
         "announcement": {
-          "badge": "New",
-          "title": "🎉 ShipAny Template Two",
-          "url": "/pricing"
+          "badge": "Live Demo",
+          "title": "Recruiter console + candidate self-scheduling + exception handling",
+          "url": "/#demo"
         },
-        "tip": "🎁 Special offer for the first 1000 users",
+        "tip": "Interview-ready prototype with click-through scenarios, mock data, and Google sign-in.",
         "buttons": [
           {
-            "title": "Get Started",
+            "title": "Open Live Demo",
             "icon": "Zap",
-            "url": "/pricing",
+            "url": "/#demo",
             "target": "_self",
             "variant": "default"
           },
           {
-            "title": "Read Document",
+            "title": "Try Google Sign-In",
             "icon": "BookOpenText",
-            "url": "/docs",
-            "target": "_blank",
+            "url": "/sign-in",
+            "target": "_self",
             "variant": "outline"
           }
         ],
         "show_avatars": true,
-        "avatars_tip": "999+ users are using ShipAny",
+        "avatars_tip": "Built to demonstrate operational depth, not just visual polish",
         "show_award": false,
         "image": {
           "src": "/imgs/features/admin.png",
-          "alt": "hero",
+          "alt": "Interview scheduling demo",
           "width": 1200,
           "height": 800
         },
         "image_invert": {
           "src": "/imgs/features/admin-dark.png",
-          "alt": "hero",
+          "alt": "Interview scheduling demo",
           "width": 1200,
           "height": 800
         },
         "background_image": {
           "src": "/imgs/bg/tree.jpg",
-          "alt": "hero"
+          "alt": "hero background"
         }
       },
       "logos": {
         "id": "logos",
-        "title": "ShipAny is built on the shoulders of giants",
+        "title": "Presented as a production-minded recruiting product, not a one-off mockup",
         "items": [
           {
             "title": "Next.js",
@@ -104,48 +106,48 @@
       "introduce": {
         "block": "features-list",
         "id": "introduce",
-        "title": "What is ShipAny",
-        "label": "Introduce",
-        "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups, including templates, components, and documentation.",
+        "title": "What this product is actually solving",
+        "label": "Product Overview",
+        "description": "Interview scheduling is a high-frequency recruiting workflow with clear rules, measurable friction, and real candidate-experience impact. This prototype turns that operational pain into a clear agent use case.",
         "image": {
           "src": "/imgs/features/landing-page.png",
-          "alt": "introduce"
+          "alt": "Product overview"
         },
         "items": [
           {
-            "title": "Ready-to-use Templates",
-            "description": "Choose from dozens of production-ready AI SaaS templates to quickly start your project.",
+            "title": "Recruiter control tower",
+            "description": "Show recommended time paths, fallback slots, and round-by-round status from a single scheduling console.",
             "icon": "RiNextjsFill",
             "image": {
               "src": "/imgs/features/1.png",
-              "alt": "introduce"
+              "alt": "Recruiter control tower"
             }
           },
           {
-            "title": "Infrastructure Setup",
-            "description": "Get instant access to scalable infrastructure with best practices built-in.",
+            "title": "Candidate self-scheduling",
+            "description": "Let candidates confirm compliant interview slots directly instead of waiting on email coordination.",
             "icon": "RiDatabase2Line",
             "image": {
               "src": "/imgs/features/2.png",
-              "alt": "introduce"
+              "alt": "Candidate self-scheduling"
             }
           },
           {
-            "title": "Quick Deployment",
-            "description": "Deploy your AI SaaS application to production in hours, not days.",
+            "title": "Exception handling",
+            "description": "Handle reschedules and no-shows with one automatic recovery path before escalating back to a recruiter.",
             "icon": "RiCloudyFill",
             "image": {
               "src": "/imgs/features/3.png",
-              "alt": "introduce"
+              "alt": "Exception handling"
             }
           },
           {
-            "title": "AI Integration",
-            "description": "Integrate AI into your project with ease using our built-in AI SDK.",
+            "title": "Agent-visible reasoning",
+            "description": "Expose the scoring logic, risk summary, and next actions so interviewers can understand why the plan is trustworthy.",
             "icon": "RiRobot2Line",
             "image": {
               "src": "/imgs/features/4.png",
-              "alt": "introduce"
+              "alt": "Agent-visible reasoning"
             }
           }
         ],
@@ -154,35 +156,35 @@
       "benefits": {
         "block": "features-accordion",
         "id": "benefits",
-        "title": "Why Choose ShipAny",
-        "label": "Benefits",
-        "description": "Get everything you need to launch your AI startup - from ready-to-use templates to technical support.",
+        "title": "Why this is a strong first agent workflow",
+        "label": "Why This Works",
+        "description": "The rules are structured enough for automation, but the business value is visible enough that interviewers immediately understand the ROI.",
         "items": [
           {
-            "title": "Complete Framework",
-            "description": "Built on Next.js with authentication, payments, and AI integration - everything works out of the box.",
+            "title": "Clear operating rules",
+            "description": "Availability matching, time zone conversion, stage order, and escalation policy are all explicit and defensible.",
             "icon": "RiNextjsFill",
             "image": {
               "src": "/imgs/features/user-billing.png",
-              "alt": "benefits"
+              "alt": "Clear operating rules"
             }
           },
           {
-            "title": "Rich Templates Library",
-            "description": "Choose from various AI SaaS templates to kickstart your project - chatbots, image generation, and more.",
+            "title": "High-frequency admin work",
+            "description": "Recruiters lose disproportionate time on scheduling coordination, even though it is not where their judgment is most valuable.",
             "icon": "RiClapperboardAiLine",
             "image": {
               "src": "/imgs/features/admin-settings.png",
-              "alt": "benefits"
+              "alt": "High-frequency admin work"
             }
           },
           {
-            "title": "Technical Guidance",
-            "description": "Get dedicated support and join our developer community to ensure your successful launch.",
+            "title": "Candidate experience leverage",
+            "description": "Faster, cleaner scheduling reduces drop-off risk and makes the overall hiring process feel more deliberate.",
             "icon": "RiCodeFill",
             "image": {
               "src": "/imgs/features/landing-page.png",
-              "alt": "benefits"
+              "alt": "Candidate experience leverage"
             }
           }
         ]
@@ -190,233 +192,204 @@
       "usage": {
         "block": "features-step",
         "id": "usage",
-        "title": "How to Launch with ShipAny",
-        "description": "Get your AI SaaS startup running in three simple steps:",
+        "title": "What an interviewer can verify in a 3-minute walkthrough",
+        "label": "Demo Journey",
+        "description": "The homepage is structured so an interviewer can click a few times and quickly see product thinking, workflow design, and UX maturity.",
         "image": {
           "src": "/imgs/features/1.png",
-          "alt": "usage"
+          "alt": "Demo journey"
         },
         "image_position": "left",
         "text_align": "center",
         "items": [
           {
-            "title": "Get ShipAny",
-            "description": "Buy ShipAny with a one-time payment. Check your email for the code and documentation.",
-            "image": {
-              "src": "/imgs/features/5.png",
-              "alt": "usage"
-            }
+            "title": "Load a realistic hiring scenario",
+            "description": "Start from a mock candidate, role, timezone, SLA target, and market mix that looks like a real recruiting operation."
           },
           {
-            "title": "Start Your Project",
-            "description": "Read the documentation and clone the code of ShipAny. Start building your AI SaaS startup.",
-            "image": {
-              "src": "/imgs/features/6.png",
-              "alt": "usage"
-            }
+            "title": "Review the recommended schedule path",
+            "description": "See the deterministic round sequence, fallback options, and cross-timezone tradeoffs in the recruiter console."
           },
           {
-            "title": "Customize Your Project",
-            "description": "Modify the template with your data and contents. Specific AI functionality needs.",
-            "image": {
-              "src": "/imgs/features/7.png",
-              "alt": "usage"
-            }
+            "title": "Switch to the candidate flow",
+            "description": "Validate that the candidate only sees a short list of compliant options instead of operational complexity."
           },
           {
-            "title": "Deploy to Production",
-            "description": "Deploy your project to production with a few steps and start serving customers immediately.",
-            "image": {
-              "src": "/imgs/features/8.png",
-              "alt": "usage"
-            }
+            "title": "Simulate exceptions",
+            "description": "Demonstrate no-show recovery, reschedule handling, and recruiter escalation logic without needing live integrations."
           }
         ],
         "className": "bg-muted"
       },
       "features": {
         "id": "features",
-        "title": "Key Features of ShipAny",
-        "description": "Everything you need to launch your AI SaaS startup quickly and efficiently.",
+        "title": "MVP capabilities already represented in the demo",
+        "description": "This is positioned as a mature product walkthrough, so each capability maps to a real operational problem in recruiting.",
         "items": [
           {
-            "title": "Next.js Boilerplate",
-            "description": "Production-ready Next.js templates with SEO-friendly structure and i18n support.",
+            "title": "Stage-aware scheduling",
+            "description": "Chain multiple interview rounds while respecting ordering and interviewer ownership.",
             "icon": "RiNextjsFill"
           },
           {
-            "title": "Authentication & Payments",
-            "description": "Integrated Google OAuth, one-tap login, and Stripe payment processing.",
+            "title": "Timezone-safe recommendations",
+            "description": "Score options using candidate-friendly hours and explicit interviewer timezone visibility.",
             "icon": "RiKey2Fill"
           },
           {
-            "title": "Data Infrastructure",
-            "description": "Built-in Supabase integration for reliable and scalable data storage.",
+            "title": "Fallback coverage",
+            "description": "Keep alternative options visible so a recruiter can recover quickly when availability changes.",
             "icon": "RiDatabase2Line"
           },
           {
-            "title": "One-Click Deployment",
-            "description": "Seamless deployment to Vercel or Cloudflare with automated setup.",
+            "title": "Candidate self-scheduling",
+            "description": "Expose only a few compliant slots to the candidate instead of making them coordinate manually.",
             "icon": "RiCloudy2Fill"
           },
           {
-            "title": "Business Analytics",
-            "description": "Integrated Google Analytics and Search Console for tracking growth.",
+            "title": "Planner brief generation",
+            "description": "Generate recruiter-ready summaries, next actions, and risk notes from the current scheduling state.",
             "icon": "RiBarChart2Line"
           },
           {
-            "title": "AI-Ready Infrastructure",
-            "description": "Pre-configured AI integration with built-in credits system and API sales.",
+            "title": "Google sign-in surface",
+            "description": "Show that the product supports authentication, even though the demo remains usable without login.",
             "icon": "RiRobot2Line"
           }
         ]
       },
       "stats": {
         "id": "stats",
-        "title": "People Love ShipAny",
-        "description": "for it's easy to use and fast to ship.",
+        "title": "Signals that this is product thinking, not just UI polish",
+        "description": "The demo is designed to communicate workflow depth quickly during an interview conversation.",
         "items": [
           {
-            "title": "999+",
-            "description": "Customers"
+            "title": "3",
+            "description": "Core surfaces: recruiter console, candidate scheduling, exception handling"
           },
           {
-            "title": "200+",
-            "description": "Blocks"
+            "title": "24h",
+            "description": "Illustrative SLA target shown directly in the scheduling control tower"
           },
           {
-            "title": "50+",
-            "description": "Templates"
+            "title": "1",
+            "description": "Automatic recovery attempt before the workflow escalates to a recruiter"
           }
         ],
         "className": "bg-muted"
       },
       "testimonials": {
         "id": "testimonials",
-        "title": "What Users Say About ShipAny",
-        "description": "Hear from developers and founders who launched their AI startups with ShipAny.",
+        "title": "How different stakeholders read the value",
+        "description": "These quotes are written to make the business value legible during a product interview.",
         "items": [
           {
-            "name": "David Chen",
-            "role": "Founder of AIWallpaper.shop",
-            "quote": "ShipAny saved us months of development time. We launched our AI wallpaper business in just 2 days and got our first paying customer within a week!",
+            "name": "Amelia Chen",
+            "role": "Recruiting Operations Lead",
+            "quote": "The strongest part of this concept is that it removes coordination work without hiding the decision logic from recruiters.",
             "image": {
               "src": "/imgs/avatars/1.png",
-              "alt": "david"
+              "alt": "Amelia Chen"
+            }
+          },
+          {
+            "name": "Marcus Lee",
+            "role": "Senior Recruiter",
+            "quote": "I can see the exact fallback path and SLA pressure at a glance, which is what makes the console feel operationally credible.",
+            "image": {
+              "src": "/imgs/avatars/2.png",
+              "alt": "Marcus Lee"
+            }
+          },
+          {
+            "name": "Sofia Martinez",
+            "role": "Candidate Experience Manager",
+            "quote": "The candidate flow is intentionally simpler than the recruiter view, which is the right UX tradeoff for reducing friction.",
+            "image": {
+              "src": "/imgs/avatars/3.png",
+              "alt": "Sofia Martinez"
+            }
+          },
+          {
+            "name": "David Wu",
+            "role": "TA Systems Partner",
+            "quote": "This is a good agent wedge because ATS, calendar, and messaging integrations can be layered in after the operating model is proven.",
+            "image": {
+              "src": "/imgs/avatars/4.png",
+              "alt": "David Wu"
             }
           },
           {
             "name": "Rachel Kim",
-            "role": "CTO at HeyBeauty.ai",
-            "quote": "The pre-built AI infrastructure is a game-changer. We didn't have to worry about architecture - just focused on our AI beauty tech and went live fast.",
-            "image": {
-              "src": "/imgs/avatars/2.png",
-              "alt": "rachel"
-            }
-          },
-          {
-            "name": "Marcus Thompson",
-            "role": "Solo Developer",
-            "quote": "As a solo developer, ShipAny gave me everything I needed - auth, payments, AI integration, and beautiful UI. Launched my SaaS in a weekend!",
-            "image": {
-              "src": "/imgs/avatars/3.png",
-              "alt": "marcus"
-            }
-          },
-          {
-            "name": "Sofia Garcia",
-            "role": "CEO of Melodisco",
-            "quote": "The templates are production-ready and highly customizable. We built our AI music platform in hours instead of months. Incredible time-to-market!",
-            "image": {
-              "src": "/imgs/avatars/4.png",
-              "alt": "sofia"
-            }
-          },
-          {
-            "name": "James Wilson",
-            "role": "Tech Lead at GPTs.works",
-            "quote": "ShipAny's infrastructure is rock-solid. We scaled from 0 to 10k users without touching the backend. Best investment for our AI startup.",
+            "role": "Hiring Manager",
+            "quote": "I like that the product does not claim to decide hiring outcomes. It focuses on reducing process drag, which is more believable.",
             "image": {
               "src": "/imgs/avatars/5.png",
-              "alt": "james"
+              "alt": "Rachel Kim"
             }
           },
           {
-            "name": "Anna Zhang",
-            "role": "Startup Founder",
-            "quote": "From idea to launch in 3 days! ShipAny's templates and deployment tools made it possible to test our AI business concept incredibly fast.",
+            "name": "Noah Thompson",
+            "role": "Product Interviewer",
+            "quote": "Within a few clicks I can see workflow logic, operating constraints, and business reasoning. That is what makes the demo memorable.",
             "image": {
               "src": "/imgs/avatars/6.png",
-              "alt": "anna"
+              "alt": "Noah Thompson"
             }
           }
         ]
       },
       "faq": {
         "id": "faq",
-        "title": "Frequently Asked Questions About ShipAny",
-        "description": "Have another question? Contact us on Discord or by email.",
+        "title": "Questions an interviewer is likely to ask",
+        "description": "The answers are positioned to show product judgment, workflow boundaries, and realistic implementation thinking.",
+        "tip": "Need deeper detail? Use the live demo above and walk through recruiter actions, candidate selection, and no-show recovery.",
         "items": [
           {
-            "question": "What exactly is ShipAny and how does it work?",
-            "answer": "ShipAny is a comprehensive NextJS boilerplate designed specifically for building AI SaaS startups. It provides ready-to-use templates, infrastructure setup, and deployment tools that help you launch your AI business in hours instead of days."
+            "question": "Why choose interview scheduling as the first agent use case?",
+            "answer": "Because it has explicit rules, high workflow frequency, and visible business impact. That makes it easier to launch safely while still demonstrating real value."
           },
           {
-            "question": "Do I need advanced technical skills to use ShipAny?",
-            "answer": "While basic programming knowledge is helpful, ShipAny is designed to be developer-friendly. Our templates and documentation make it easy to get started, even if you're not an expert in AI or cloud infrastructure."
+            "question": "What is actually automated versus still rule-based?",
+            "answer": "Slot selection is deterministic and rule-driven, while the AI layer focuses on summaries, messaging, and risk framing. That boundary keeps the experience trustworthy."
           },
           {
-            "question": "What types of AI SaaS can I build with ShipAny?",
-            "answer": "ShipAny supports a wide range of AI applications, from content generation to data analysis tools. Our templates cover popular use cases like AI chatbots, content generators, image processing apps, and more."
+            "question": "How does the candidate experience stay simple?",
+            "answer": "The system hides operational complexity and only presents a small set of valid options. Candidates get speed and clarity, while recruiters keep control of the constraints."
           },
           {
-            "question": "How long does it typically take to launch with ShipAny?",
-            "answer": "With ShipAny, you can have a working prototype in hours and a production-ready application in hours. Our one-click deployment and pre-configured infrastructure significantly reduce the traditional months-long development cycle."
+            "question": "How does exception handling work in this MVP?",
+            "answer": "The agent can reschedule once automatically on a no-show or conflict using the next-best compliant slot. Complex cases are then escalated back to a recruiter."
           },
           {
-            "question": "What's included in the ShipAny infrastructure?",
-            "answer": "ShipAny provides a complete infrastructure stack including authentication, database setup, API integration, payment processing, and scalable cloud deployment. Everything is pre-configured following industry best practices."
+            "question": "Is this already integrated with ATS and calendars?",
+            "answer": "Not in this interview version. The prototype uses realistic mock data so the interviewer can evaluate the operating model before live integrations are added."
           },
           {
-            "question": "Can I customize the templates to match my brand?",
-            "answer": "Absolutely! All ShipAny templates are fully customizable. You can modify the design, features, and functionality to match your brand identity and specific business requirements while maintaining the robust underlying infrastructure."
+            "question": "Why show Google sign-in if the demo works without login?",
+            "answer": "Because it signals that the product already includes a standard SaaS authentication surface, while keeping the interview flow frictionless for reviewers."
           }
         ]
       },
       "cta": {
         "id": "cta",
-        "title": "Ship your first AI SaaS Startup",
-        "description": "Start from here, ship with ShipAny.",
+        "title": "Walk the product in under five minutes",
+        "description": "Open the live demo, switch scenarios, trigger the agent briefing, and show how Google sign-in fits into a product-ready experience.",
         "buttons": [
           {
-            "title": "Get ShipAny",
-            "url": "https://shipany.ai",
-            "target": "_blank",
+            "title": "Open Live Demo",
+            "url": "/#demo",
+            "target": "_self",
             "icon": "Zap"
           },
           {
-            "title": "Read Document",
-            "url": "/docs",
-            "target": "_blank",
+            "title": "Google Sign-In",
+            "url": "/sign-in",
+            "target": "_self",
             "variant": "outline",
             "icon": "BookOpenText"
           }
         ],
-        "className": "bg-muted"
-      },
-      "subscribe": {
-        "id": "subscribe",
-        "title": "Subscribe to our newsletter",
-        "description": "Get the latest news and updates from ShipAny.",
-        "submit": {
-          "input": {
-            "placeholder": "Enter your email"
-          },
-          "button": {
-            "title": "Subscribe"
-          },
-          "action": "/api/subscribe"
-        },
         "className": "bg-muted"
       }
     }
