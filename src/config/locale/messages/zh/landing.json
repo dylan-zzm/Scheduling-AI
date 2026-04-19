@@ -14,7 +14,7 @@
     "nav": {
       "items": [
         {
-          "title": "产品演示",
+          "title": "平台概览",
           "url": "/#demo",
           "icon": "Sparkles"
         },
@@ -50,7 +50,7 @@
     "id": "footer",
     "brand": {
       "title": "Interview Scheduling AI Agent",
-      "description": "一个用于面试展示的成熟产品原型，重点呈现招聘排期控制台、候选人自助预约，以及异常处理工作流。",
+      "description": "一个面向企业招聘团队的智能排期平台，统一处理招聘控制台、候选人自助预约以及异常恢复工作流。",
       "logo": {
         "src": "/logo.png",
         "alt": "Interview Scheduling AI Agent",
@@ -65,7 +65,7 @@
           "title": "产品",
           "children": [
             {
-              "title": "演示首页",
+              "title": "平台概览",
               "url": "/#demo",
               "target": "_self"
             },

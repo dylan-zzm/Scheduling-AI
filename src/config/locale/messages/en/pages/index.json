@@ -1,7 +1,7 @@
 {
   "page": {
     "title": "Interview Scheduling AI Agent",
-    "description": "A polished SaaS-style product demo for recruiter scheduling operations, candidate self-scheduling, and exception handling.",
+    "description": "An intelligent scheduling platform for recruiting teams, covering recruiter operations, candidate self-scheduling, and exception recovery.",
     "show_sections": [
       "hero",
       "logos",
@@ -21,14 +21,14 @@
         "highlight_text": "instant",
         "description": "An AI recruiting workflow that reads stage rules, matches calendars, converts time zones, and handles reschedules without recruiter back-and-forth.",
         "announcement": {
-          "badge": "Live Demo",
+          "badge": "Platform",
           "title": "Recruiter console + candidate self-scheduling + exception handling",
           "url": "/#demo"
         },
-        "tip": "Interview-ready prototype with click-through scenarios, mock data, and Google sign-in.",
+        "tip": "Includes realistic business scenarios, mock data, and Google sign-in so teams can experience the core workflow immediately.",
         "buttons": [
           {
-            "title": "Open Live Demo",
+            "title": "Explore Platform",
             "icon": "Zap",
             "url": "/#demo",
             "target": "_self",
@@ -43,17 +43,17 @@
           }
         ],
         "show_avatars": true,
-        "avatars_tip": "Built to demonstrate operational depth, not just visual polish",
+        "avatars_tip": "Brings business rules, workflow logic, and product polish into one surface.",
         "show_award": false,
         "image": {
           "src": "/imgs/features/admin.png",
-          "alt": "Interview scheduling demo",
+          "alt": "Interview scheduling platform",
           "width": 1200,
           "height": 800
         },
         "image_invert": {
           "src": "/imgs/features/admin-dark.png",
-          "alt": "Interview scheduling demo",
+          "alt": "Interview scheduling platform",
           "width": 1200,
           "height": 800
         },
@@ -64,7 +64,7 @@
       },
       "logos": {
         "id": "logos",
-        "title": "Presented as a production-minded recruiting product, not a one-off mockup",
+        "title": "Built to feel like a mature recruiting platform from the first screen",
         "items": [
           {
             "title": "Next.js",
@@ -108,7 +108,7 @@
         "id": "introduce",
         "title": "What this product is actually solving",
         "label": "Product Overview",
-        "description": "Interview scheduling is a high-frequency recruiting workflow with clear rules, measurable friction, and real candidate-experience impact. This prototype turns that operational pain into a clear agent use case.",
+        "description": "Interview scheduling is a high-frequency recruiting workflow with clear rules, measurable friction, and real candidate-experience impact. This product turns that operational pain into a scalable scheduling capability.",
         "image": {
           "src": "/imgs/features/landing-page.png",
           "alt": "Product overview"
@@ -158,7 +158,7 @@
         "id": "benefits",
         "title": "Why this is a strong first agent workflow",
         "label": "Why This Works",
-        "description": "The rules are structured enough for automation, but the business value is visible enough that interviewers immediately understand the ROI.",
+        "description": "The rules are structured enough for automation and the business value is immediate, making this a strong foundation for recruiting automation.",
         "items": [
           {
             "title": "Clear operating rules",
@@ -192,12 +192,12 @@
       "usage": {
         "block": "features-step",
         "id": "usage",
-        "title": "What an interviewer can verify in a 3-minute walkthrough",
-        "label": "Demo Journey",
-        "description": "The homepage is structured so an interviewer can click a few times and quickly see product thinking, workflow design, and UX maturity.",
+        "title": "The core path from intake to confirmed scheduling",
+        "label": "Platform Flow",
+        "description": "The homepage is structured like a real product so recruiting teams can understand setup, recommendation, confirmation, and recovery in one pass.",
         "image": {
           "src": "/imgs/features/1.png",
-          "alt": "Demo journey"
+          "alt": "Platform flow"
         },
         "image_position": "left",
         "text_align": "center",
@@ -223,8 +223,8 @@
       },
       "features": {
         "id": "features",
-        "title": "MVP capabilities already represented in the demo",
-        "description": "This is positioned as a mature product walkthrough, so each capability maps to a real operational problem in recruiting.",
+        "title": "Core capabilities already covered by the platform",
+        "description": "Each capability maps to a real operational problem in recruiting rather than existing for show.",
         "items": [
           {
             "title": "Stage-aware scheduling",
@@ -253,7 +253,7 @@
           },
           {
             "title": "Google sign-in surface",
-            "description": "Show that the product supports authentication, even though the demo remains usable without login.",
+            "description": "Supports a standard SaaS sign-in flow so teams can enter the platform through a familiar access layer.",
             "icon": "RiRobot2Line"
           }
         ]
@@ -261,7 +261,7 @@
       "stats": {
         "id": "stats",
         "title": "Signals that this is product thinking, not just UI polish",
-        "description": "The demo is designed to communicate workflow depth quickly during an interview conversation.",
+        "description": "Read the operational upside through workflow coverage, SLA pressure, and recovery depth.",
         "items": [
           {
             "title": "3",
@@ -281,7 +281,7 @@
       "testimonials": {
         "id": "testimonials",
         "title": "How different stakeholders read the value",
-        "description": "These quotes are written to make the business value legible during a product interview.",
+        "description": "From recruiting operations to business leaders, the value is easy to see.",
         "items": [
           {
             "name": "Amelia Chen",
@@ -330,8 +330,8 @@
           },
           {
             "name": "Noah Thompson",
-            "role": "Product Interviewer",
-            "quote": "Within a few clicks I can see workflow logic, operating constraints, and business reasoning. That is what makes the demo memorable.",
+            "role": "Business Leader",
+            "quote": "Within a few clicks I can see how the platform handles workflow logic, operational constraints, and recovery with discipline.",
             "image": {
               "src": "/imgs/avatars/6.png",
               "alt": "Noah Thompson"
@@ -341,13 +341,13 @@
       },
       "faq": {
         "id": "faq",
-        "title": "Questions an interviewer is likely to ask",
-        "description": "The answers are positioned to show product judgment, workflow boundaries, and realistic implementation thinking.",
-        "tip": "Need deeper detail? Use the live demo above and walk through recruiter actions, candidate selection, and no-show recovery.",
+        "title": "Questions teams usually ask first",
+        "description": "These answers clarify where the platform fits, what it automates, and how it can expand.",
+        "tip": "Want more detail? Return to the platform overview above and walk through scheduling, candidate selection, and no-show recovery.",
         "items": [
           {
             "question": "Why choose interview scheduling as the first agent use case?",
-            "answer": "Because it has explicit rules, high workflow frequency, and visible business impact. That makes it easier to launch safely while still demonstrating real value."
+            "answer": "Because it has explicit rules, high workflow frequency, and visible business impact. That makes it easier to launch safely while still delivering real value."
           },
           {
             "question": "What is actually automated versus still rule-based?",
@@ -363,21 +363,21 @@
           },
           {
             "question": "Is this already integrated with ATS and calendars?",
-            "answer": "Not in this interview version. The prototype uses realistic mock data so the interviewer can evaluate the operating model before live integrations are added."
+            "answer": "The current release uses high-quality simulated data to show the core operating model. ATS, calendar, and messaging integrations can be layered in as the system expands."
           },
           {
-            "question": "Why show Google sign-in if the demo works without login?",
-            "answer": "Because it signals that the product already includes a standard SaaS authentication surface, while keeping the interview flow frictionless for reviewers."
+            "question": "Why support Google sign-in if the core workflow is open?",
+            "answer": "The current release prioritizes fast access to the core workflow. Sign-in lays the groundwork for team workspaces, permissions, and activity history."
           }
         ]
       },
       "cta": {
         "id": "cta",
         "title": "Walk the product in under five minutes",
-        "description": "Open the live demo, switch scenarios, trigger the agent briefing, and show how Google sign-in fits into a product-ready experience.",
+        "description": "Enter the platform, switch across hiring scenarios, and review automated scheduling, candidate selection, and exception recovery in one flow.",
         "buttons": [
           {
-            "title": "Open Live Demo",
+            "title": "Explore Platform",
             "url": "/#demo",
             "target": "_self",
             "icon": "Zap"

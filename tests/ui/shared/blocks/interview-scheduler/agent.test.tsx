@@ -34,6 +34,7 @@ describe('InterviewSchedulerAgent', () => {
       },
     });
 
+    await user.click(screen.getByRole('tab', { name: 'Candidate' }));
     await user.click(screen.getByTestId('candidate-option-0'));
     await user.click(
       screen.getByRole('button', { name: 'Confirm selected slot' })
@@ -114,7 +115,7 @@ describe('InterviewSchedulerAgent', () => {
     expect(toast.error).not.toHaveBeenCalled();
     expect(
       await screen.findByText(
-        /Read candidate profile for Qiwen Yuan \(Talent Management Strategy Intern\)/i
+        /Qiwen Yuan now has 3 recommended rounds/i
       )
     ).toBeInTheDocument();
   });

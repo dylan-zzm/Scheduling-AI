@@ -1,7 +1,7 @@
 {
   "page": {
     "title": "面试安排 AI Agent",
-    "description": "一个更像成熟 SaaS 产品的面试演示首页，重点展示招聘排期控制台、候选人自助预约与异常处理。",
+    "description": "一个面向企业招聘团队的智能排期平台，覆盖招聘排期控制台、候选人自助预约与异常恢复。",
     "show_sections": [
       "hero",
       "logos",
@@ -21,14 +21,14 @@
         "highlight_text": "顺滑",
         "description": "一个面向招聘流程的 AI 工作流：读取轮次规则、匹配面试官日历、完成时区换算，并在改期与爽约场景下自动恢复。",
         "announcement": {
-          "badge": "在线演示",
+          "badge": "平台概览",
           "title": "招聘控制台 + 候选人自助预约 + 异常处理",
           "url": "/#demo"
         },
-        "tip": "这是一个适合面试场景的产品原型，带有可点击的模拟数据和 Google 登录入口。",
+        "tip": "内置真实业务场景、模拟数据与 Google 登录入口，可直接体验核心流程。",
         "buttons": [
           {
-            "title": "查看产品演示",
+            "title": "进入平台",
             "icon": "Zap",
             "url": "/#demo",
             "target": "_self",
@@ -43,17 +43,17 @@
           }
         ],
         "show_avatars": true,
-        "avatars_tip": "不是单纯做一个页面，而是让面试官快速看懂业务深度",
+        "avatars_tip": "把业务规则、工作流逻辑和产品成熟度放到同一个界面里",
         "show_award": false,
         "image": {
           "src": "/imgs/features/admin.png",
-          "alt": "面试安排演示",
+          "alt": "面试安排平台",
           "width": 1200,
           "height": 800
         },
         "image_invert": {
           "src": "/imgs/features/admin-dark.png",
-          "alt": "面试安排演示",
+          "alt": "面试安排平台",
           "width": 1200,
           "height": 800
         },
@@ -64,7 +64,7 @@
       },
       "logos": {
         "id": "logos",
-        "title": "用成熟 SaaS 产品的方式来呈现招聘场景，而不是只做一个静态 mockup",
+        "title": "用成熟 SaaS 产品的方式来呈现招聘排期平台",
         "items": [
           {
             "title": "Next.js",
@@ -108,7 +108,7 @@
         "id": "introduce",
         "title": "这个产品真正解决的是什么问题",
         "label": "产品概览",
-        "description": "面试安排是招聘流程中频次高、规则清晰、但极其消耗 recruiter 时间的环节。这个原型把这类“高频行政协调”抽象成了一个非常适合 agent 先落地的场景。",
+        "description": "面试安排是招聘流程中频次高、规则清晰、但极其消耗 recruiter 时间的环节。这个产品把这类高频行政协调转化成了可规模化的智能排期能力。",
         "image": {
           "src": "/imgs/features/landing-page.png",
           "alt": "产品概览"
@@ -158,7 +158,7 @@
         "id": "benefits",
         "title": "为什么这个场景适合作为第一类 AI Agent 产品",
         "label": "为什么可行",
-        "description": "它既有足够清晰的规则边界，又有足够真实的业务价值，所以很适合在面试里展示“产品判断 + agent workflow 设计能力”。",
+        "description": "它既有足够清晰的规则边界，又有足够真实的业务价值，因此非常适合作为招聘自动化平台的第一条产品能力。",
         "items": [
           {
             "title": "规则清晰",
@@ -192,18 +192,18 @@
       "usage": {
         "block": "features-step",
         "id": "usage",
-        "title": "面试官可以在 3 分钟内验证的几个关键点",
-        "label": "演示路径",
-        "description": "这个首页不是普通的营销页，而是为了让面试官点几下就能感受到你的业务理解、流程设计和产品成熟度。",
+        "title": "从进入平台到完成排期的关键路径",
+        "label": "平台流程",
+        "description": "首页按真实产品结构组织，让招聘团队可以快速理解平台如何配置、推荐、确认和恢复排期。",
         "image": {
           "src": "/imgs/features/1.png",
-          "alt": "演示路径"
+          "alt": "平台流程"
         },
         "image_position": "left",
         "text_align": "center",
         "items": [
           {
-            "title": "加载一个真实感场景",
+            "title": "加载一个真实招聘场景",
             "description": "从候选人、职位、时区、SLA 和市场组合出发，快速进入一个像真实招聘运营的上下文。"
           },
           {
@@ -223,8 +223,8 @@
       },
       "features": {
         "id": "features",
-        "title": "当前 MVP 已经体现出的核心能力",
-        "description": "这些能力都直接对应招聘排期中的真实问题，而不是为了看起来“像 AI 产品”而堆出来的功能。",
+        "title": "当前平台覆盖的核心能力",
+        "description": "每个能力都直接对应招聘排期中的真实问题，而不是为了展示效果而堆砌的功能。",
         "items": [
           {
             "title": "多轮面试串联",
@@ -252,16 +252,16 @@
             "icon": "RiBarChart2Line"
           },
           {
-            "title": "Google 登录展示",
-            "description": "保留登录能力，体现这是一个成熟 SaaS 产品，而不是一次性静态页面。",
+            "title": "Google 登录",
+            "description": "支持标准 SaaS 登录方式，方便团队成员从统一入口进入平台。",
             "icon": "RiRobot2Line"
           }
         ]
       },
       "stats": {
         "id": "stats",
-        "title": "让面试官快速感受到这是一个“有产品思考”的原型",
-        "description": "数字不只是装饰，而是在帮助你更快讲清楚这个产品的边界和价值。",
+        "title": "一眼看懂平台价值",
+        "description": "从效率、SLA 和恢复机制三个维度理解平台带来的业务收益。",
         "items": [
           {
             "title": "3",
@@ -281,7 +281,7 @@
       "testimonials": {
         "id": "testimonials",
         "title": "不同角色会如何理解这个产品价值",
-        "description": "这一组内容的目的不是做营销，而是帮你在面试中更快切换到业务语言。",
+        "description": "从招聘运营到业务负责人，平台价值都能被直接读懂。",
         "items": [
           {
             "name": "Amelia Chen",
@@ -330,8 +330,8 @@
           },
           {
             "name": "Noah Thompson",
-            "role": "产品面试官",
-            "quote": "点几下就能看出你对业务流程、agent 边界和产品成熟度的理解，这是一个很适合面试展示的方向。",
+            "role": "业务负责人",
+            "quote": "几步操作就能看出平台对流程、约束和异常恢复的掌控能力，这种产品完成度很有说服力。",
             "image": {
               "src": "/imgs/avatars/6.png",
               "alt": "Noah Thompson"
@@ -341,9 +341,9 @@
       },
       "faq": {
         "id": "faq",
-        "title": "面试官大概率会问的问题",
-        "description": "这些回答的目标是帮助你把这个产品讲得既有深度，又不显得过度承诺。",
-        "tip": "如果对方想看得更细，可以直接回到上方 demo，现场演示推荐时间、候选人选时和爽约恢复。",
+        "title": "企业团队最关心的问题",
+        "description": "这些问题帮助你快速理解平台的边界、价值与后续扩展方向。",
+        "tip": "如果想继续深入，可直接回到上方平台概览，查看排期推荐、候选人选时与爽约恢复流程。",
         "items": [
           {
             "question": "为什么选面试安排作为第一个 agent 场景？",
@@ -363,21 +363,21 @@
           },
           {
             "question": "这个版本已经接 ATS 和日历了吗？",
-            "answer": "面试展示版本没有接真实系统，而是用高质量 mock 数据来验证产品流程、信息结构和工作流设计。"
+            "answer": "当前版本通过高质量模拟数据展示核心工作流，后续可逐步接入 ATS、Calendar 与消息渠道。"
           },
           {
             "question": "为什么保留 Google 登录，但登录前后功能又没有差别？",
-            "answer": "因为这个阶段的目标是让面试官知道你已经考虑了 SaaS 产品的基础能力，但又不希望登录门槛打断体验。"
+            "answer": "当前版本优先开放核心流程体验；登录能力用于承接后续的团队空间、权限体系和操作记录。"
           }
         ]
       },
       "cta": {
         "id": "cta",
         "title": "用 5 分钟把整个产品讲清楚",
-        "description": "打开 live demo，切换几个场景，运行 agent briefing，再点一下 Google 登录，就能把你的产品判断和落地能力完整展示出来。",
+        "description": "进入平台，切换不同招聘场景，查看自动排期、候选人选时与异常恢复流程。",
         "buttons": [
           {
-            "title": "查看产品演示",
+            "title": "进入平台",
             "url": "/#demo",
             "target": "_self",
             "icon": "Zap"

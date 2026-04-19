@@ -54,9 +54,9 @@
     "reset": "Reset"
   },
   "hero": {
-    "eyebrow": "Interview Operations Demo",
-    "title": "A recruiter control tower with candidate self-scheduling and exception recovery built in.",
-    "description": "This demo is designed for interviews: realistic scenarios, visible scheduling logic, and enough product polish to feel like a mature SaaS workflow instead of a static mockup.",
+    "eyebrow": "Recruiting Operations Platform",
+    "title": "Run one agent to build the full interview schedule.",
+    "description": "Match interviewer calendars, candidate time zones, and fallback recovery in one recruiter-facing workflow.",
     "highlights": [
       "ATS-triggered intake",
       "Deterministic slot ranking",
@@ -64,9 +64,28 @@
       "One-click no-show recovery"
     ],
     "actions": {
-      "run_agent": "Generate briefing",
+      "run_agent": "Run Agent",
       "auto_book": "Auto-book top path",
       "reset": "Reset workspace"
+    },
+    "preview": {
+      "label": "Before you run",
+      "title": "The agent has not generated a plan yet.",
+      "description": "Choose a scenario, then run the agent to produce the first draft schedule, recruiter brief, and exception coverage.",
+      "result_label": "Agent output",
+      "result_title": "The latest scheduling plan",
+      "ready_badge": "Plan ready",
+      "running": "Generating the interview plan and operational brief...",
+      "fallback": "Fallback coverage will appear here after the first run.",
+      "steps": [
+        "Read candidate constraints, role context, and time zone requirements.",
+        "Rank the earliest compliant interview path across all stages.",
+        "Draft recruiter messaging, reminders, and one-step recovery guidance."
+      ]
+    },
+    "scenarios": {
+      "label": "Scenario",
+      "description": "Use one realistic hiring context to show what the agent should solve first."
     },
     "stats": {
       "sla": "SLA target",
@@ -82,8 +101,8 @@
     }
   },
   "demo_scenarios": {
-    "title": "Demo scenarios",
-    "description": "Load a realistic hiring situation so the interviewer can quickly see why the workflow behaves the way it does.",
+    "title": "Business scenarios",
+    "description": "Switch across hiring contexts to see how the platform organizes scheduling under different timezone, SLA, and priority constraints.",
     "active_label": "Loaded",
     "items": [
       {
@@ -135,12 +154,15 @@
   },
   "intake": {
     "title": "Scheduling intake workspace",
-    "description": "A recruiter-facing workspace for candidate constraints, role context, SLA pressure, and scenario setup before the agent runs."
+    "description": "A recruiter-facing workspace for candidate constraints, role context, SLA pressure, and business context before the agent runs."
   },
   "planner": {
     "title": "AI Planner Output",
     "description": "Run the agent to generate a recruiter-ready summary, messaging drafts, and operational risks.",
     "recruiter_brief": "Recruiter brief",
+    "booked_rounds": "Booked rounds",
+    "recommended_path": "Recommended path",
+    "latest_activity": "Latest activity",
     "next_actions": "Next actions",
     "risks": "Risks to monitor",
     "placeholder": "Run the agent to generate this section.",
@@ -158,6 +180,17 @@
     },
     "errors": {
       "generic": "Failed to generate the interview plan"
+    }
+  },
+  "workspace": {
+    "label": "Operations workspace",
+    "title": "Continue with execution details",
+    "description": "The main flow is handled above. Use this area to inspect scheduling controls, candidate-facing options, messages, and activity history.",
+    "tabs": {
+      "schedule": "Schedule",
+      "candidate": "Candidate",
+      "messages": "Messages",
+      "activity": "Activity"
     }
   },
   "console": {
@@ -199,7 +232,7 @@
     "markets": "Markets"
   },
   "guide": {
-    "title": "How this upgraded prototype works",
+    "title": "How the platform works",
     "tabs": {
       "flow": "Flow",
       "logic": "Logic",
@@ -261,7 +294,7 @@
   },
   "activity": {
     "title": "Agent Activity",
-    "footer": "This prototype demonstrates workflow logic for scheduling, self-booking, reminders, and no-show recovery. In production, the agent would also create meeting links, sync ATS status, record exceptions, and escalate complex cases to a recruiter.",
+    "footer": "The platform covers scheduling, self-booking, reminders, and no-show recovery. In production, it can also create meeting links, sync ATS status, record exceptions, and escalate complex cases to a recruiter.",
     "ready": "Agent ready: waiting for candidate details and stage rules.",
     "reset": "Agent reset. Waiting for the next scheduling run.",
     "scenario_loaded": "Loaded scenario: {scenario}.",
@@ -274,7 +307,7 @@
       "cross_timezone_handoffs": "Found {count} rounds that require cross-timezone coordination.",
       "same_region_fit": "Primary sequence stays within closely aligned working hours.",
       "generated_options": "Generated self-scheduling options, reminders, and fallback reschedule options.",
-      "demo_briefing": "Generated a demo-safe recruiter brief and fallback messaging without requiring live integrations."
+      "demo_briefing": "Generated a recruiter brief and fallback messaging from the current scheduling state."
     },
     "candidate_selected": "Candidate selected {stage} with {interviewer} at {time} ({timezone}).",
     "recruiter_booked": "Booked {stage} with {interviewer} at {time} ({timezone}).",

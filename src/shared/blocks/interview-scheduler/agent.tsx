@@ -17,7 +17,6 @@ import {
   ShieldCheck,
   Sparkles,
   UserCheck,
-  Users,
   Workflow,
 } from 'lucide-react';
 
@@ -138,6 +137,7 @@ export function InterviewSchedulerAgent({
   const actionItems = t.raw('guide.actions.items') as string[];
   const nextItems = t.raw('guide.next.items') as string[];
   const heroHighlights = t.raw('hero.highlights') as string[];
+  const heroPreviewSteps = t.raw('hero.preview.steps') as string[];
   const demoScenarios = t.raw('demo_scenarios.items') as DemoScenario[];
   const defaultScenario =
     demoScenarios[0] ??
@@ -180,6 +180,7 @@ export function InterviewSchedulerAgent({
   >({});
   const [plannerResult, setPlannerResult] =
     useState<InterviewPlannerResult | null>(null);
+  const [hasStarted, setHasStarted] = useState(false);
   const [agentLog, setAgentLog] = useState<string[]>(() => [t('activity.ready')]);
   const [isRunningAgent, setIsRunningAgent] = useState(false);
 
@@ -358,6 +359,7 @@ export function InterviewSchedulerAgent({
     setStageStatus({});
     setSelectedCandidateOptions({});
     setPlannerResult(null);
+    setHasStarted(false);
     setAgentLog([
       t('activity.scenario_loaded', { scenario: scenario.title }),
       t('activity.ready'),
@@ -365,6 +367,7 @@ export function InterviewSchedulerAgent({
   };
 
   const runAgent = async () => {
+    setHasStarted(true);
     setIsRunningAgent(true);
 
     try {
@@ -415,6 +418,7 @@ export function InterviewSchedulerAgent({
     option: StageOption,
     source: BookingSource = 'recruiter'
   ) => {
+    setHasStarted(true);
     setBookings((prev) => ({ ...prev, [stageId]: option }));
     setStageStatus((prev) => ({ ...prev, [stageId]: 'scheduled' }));
     setAgentLog((prev) => [
@@ -434,6 +438,7 @@ export function InterviewSchedulerAgent({
   };
 
   const autoBookTopPath = () => {
+    setHasStarted(true);
     const nextBookings: Record<string, StageOption> = {};
     const nextStatuses: Record<string, StageStatus> = {};
     const nextSelections: Record<string, StageOption> = {};
@@ -476,6 +481,7 @@ export function InterviewSchedulerAgent({
       return;
     }
 
+    setHasStarted(true);
     const next = alternatives[0];
 
     setBookings((prev) => ({ ...prev, [stageId]: next }));
@@ -492,6 +498,7 @@ export function InterviewSchedulerAgent({
   };
 
   const markNoShow = (stageId: string, alternatives: StageOption[]) => {
+    setHasStarted(true);
     setStageStatus((prev) => ({ ...prev, [stageId]: 'no_show' }));
     setAgentLog((prev) => [
       ...prev,
@@ -514,7 +521,11 @@ export function InterviewSchedulerAgent({
     setStageStatus({});
     setSelectedCandidateOptions({});
     setPlannerResult(null);
-    setAgentLog([t('activity.reset')]);
+    setHasStarted(false);
+    setAgentLog([
+      t('activity.scenario_loaded', { scenario: activeScenario.title }),
+      t('activity.reset'),
+    ]);
   };
 
   const heroStats = [
@@ -543,25 +554,34 @@ export function InterviewSchedulerAgent({
       detail: activeScenario.automation,
     },
   ];
+  const heroPrimaryStats = heroStats.slice(0, 3);
 
-  const operationsCards = [
-    {
-      label: t('operations.sla'),
-      value: activeScenario.sla,
-    },
-    {
-      label: t('operations.priority'),
-      value: activeScenario.priority,
-    },
-    {
-      label: t('operations.fallback_coverage'),
-      value: `${fallbackCoverageCount}/${stages.length}`,
-    },
-    {
-      label: t('operations.markets'),
-      value: activeScenario.markets,
-    },
-  ];
+  const latestActivity = agentLog[agentLog.length - 1] || t('activity.ready');
+  const planStages = recommendations.map(({ stage, selected, alternatives }) => {
+    const chosen = bookings[stage.id] || selected;
+    return {
+      stage,
+      chosen,
+      alternativesCount: alternatives.length,
+      status: stageStatus[stage.id],
+    };
+  });
+
+  const lightWorkbenchCardClass =
+    'rounded-[28px] border-slate-200/80 bg-white/95 text-slate-900 shadow-lg shadow-slate-200/50 backdrop-blur dark:border-slate-200/80 dark:bg-white/95 dark:text-slate-900 dark:shadow-slate-950/10';
+  const lightWorkbenchInsetClass =
+    'rounded-[24px] border border-slate-200 bg-slate-50 text-slate-900 dark:border-slate-200 dark:bg-slate-50 dark:text-slate-900';
+  const lightFieldClass =
+    'border-slate-300 bg-white text-slate-950 placeholder:text-slate-400 shadow-sm dark:border-slate-300 dark:bg-white dark:text-slate-950 dark:placeholder:text-slate-400';
+  const lightFieldLabelClass = 'text-slate-700 dark:text-slate-700';
+  const lightSelectContentClass =
+    'border-slate-200 bg-white text-slate-900 dark:border-slate-200 dark:bg-white dark:text-slate-900';
+  const lightOutlineBadgeClass =
+    'border-slate-300 bg-white text-slate-700 dark:border-slate-300 dark:bg-white dark:text-slate-700';
+  const lightSolidBadgeClass =
+    'border-transparent bg-slate-900 text-white dark:bg-slate-900 dark:text-white';
+  const lightOutlineButtonClass =
+    'border-slate-300 bg-white text-slate-900 shadow-sm hover:bg-slate-50 dark:border-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-50';
 
   return (
     <section
@@ -600,34 +620,12 @@ export function InterviewSchedulerAgent({
                   <div className="text-xs font-medium uppercase tracking-[0.28em] text-slate-300">
                     {t('hero.eyebrow')}
                   </div>
-                  <h1 className="max-w-4xl text-4xl leading-tight font-semibold tracking-tight md:text-5xl">
+                  <h1 className="max-w-3xl text-4xl leading-tight font-semibold tracking-tight md:text-5xl">
                     {t('hero.title')}
                   </h1>
-                  <p className="max-w-3xl text-base leading-7 text-slate-300 md:text-lg">
+                  <p className="max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
                     {t('hero.description')}
                   </p>
-                </div>
-
-                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                  {heroStats.map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="rounded-[24px] border border-white/10 bg-white/[0.08] p-4 backdrop-blur"
-                    >
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="text-xs uppercase tracking-[0.2em] text-slate-300">
-                          {stat.label}
-                        </div>
-                        <stat.icon className="h-4 w-4 text-cyan-200" />
-                      </div>
-                      <div className="mt-3 text-2xl font-semibold tracking-tight">
-                        {stat.value}
-                      </div>
-                      <div className="mt-1 text-sm text-slate-300">
-                        {stat.detail}
-                      </div>
-                    </div>
-                  ))}
                 </div>
 
                 <div className="flex flex-wrap gap-3">
@@ -641,27 +639,20 @@ export function InterviewSchedulerAgent({
                       ? t('form.running_agent')
                       : t('hero.actions.run_agent')}
                   </Button>
-                  <Button
-                    data-testid="hero-auto-book"
-                    variant="outline"
-                    className="rounded-full border-white/20 bg-transparent px-5 text-white hover:bg-white/10 hover:text-white"
-                    onClick={autoBookTopPath}
-                  >
-                    <CheckCircle2 className="mr-2 h-4 w-4" />
-                    {t('hero.actions.auto_book')}
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="rounded-full px-5 text-slate-200 hover:bg-white/10 hover:text-white"
-                    onClick={resetAgent}
-                  >
-                    <RefreshCcw className="mr-2 h-4 w-4" />
-                    {t('hero.actions.reset')}
-                  </Button>
+                  {hasStarted ? (
+                    <Button
+                      variant="ghost"
+                      className="rounded-full px-5 text-slate-200 hover:bg-white/10 hover:text-white"
+                      onClick={resetAgent}
+                    >
+                      <RefreshCcw className="mr-2 h-4 w-4" />
+                      {t('hero.actions.reset')}
+                    </Button>
+                  ) : null}
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  {heroHighlights.map((highlight) => (
+                  {heroHighlights.slice(0, 3).map((highlight) => (
                     <div
                       key={highlight}
                       className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-2 text-sm text-slate-200"
@@ -670,6 +661,30 @@ export function InterviewSchedulerAgent({
                     </div>
                   ))}
                 </div>
+
+                {hasStarted ? (
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    {heroPrimaryStats.map((stat) => (
+                      <div
+                        key={stat.label}
+                        className="rounded-[24px] border border-white/10 bg-white/[0.08] p-4 backdrop-blur"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="text-xs uppercase tracking-[0.2em] text-slate-300">
+                            {stat.label}
+                          </div>
+                          <stat.icon className="h-4 w-4 text-cyan-200" />
+                        </div>
+                        <div className="mt-3 text-2xl font-semibold tracking-tight">
+                          {stat.value}
+                        </div>
+                        <div className="mt-1 text-sm text-slate-300">
+                          {stat.detail}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
               </div>
 
               <div className="space-y-4">
@@ -677,65 +692,77 @@ export function InterviewSchedulerAgent({
                   <div className="flex items-center justify-between gap-4">
                     <div>
                       <div className="text-xs uppercase tracking-[0.24em] text-slate-300">
-                        {activeScenario.badge}
+                        {hasStarted
+                          ? t('hero.preview.result_label')
+                          : t('hero.preview.label')}
                       </div>
                       <div className="mt-2 text-2xl font-semibold tracking-tight">
-                        {activeScenario.title}
+                        {hasStarted
+                          ? t('hero.preview.result_title')
+                          : t('hero.preview.title')}
                       </div>
                     </div>
-                    <Badge className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-white">
-                      {activeScenario.sla}
-                    </Badge>
+                    {hasStarted ? (
+                      <Badge className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-white">
+                        {isRunningAgent
+                          ? t('form.running_agent')
+                          : t('hero.preview.ready_badge')}
+                      </Badge>
+                    ) : null}
                   </div>
                   <p className="mt-3 text-sm leading-6 text-slate-300">
-                    {activeScenario.summary}
+                    {hasStarted
+                      ? plannerResult?.summary || t('hero.preview.running')
+                      : t('hero.preview.description')}
                   </p>
-                  <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-2xl border border-white/10 bg-slate-950/35 p-3">
-                      <div className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                        {t('hero.summary.candidate')}
+                  {hasStarted ? (
+                    <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                      <div className="rounded-2xl border border-white/10 bg-slate-950/35 p-3">
+                        <div className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                          {t('planner.next_actions')}
+                        </div>
+                        <div className="mt-2 text-sm leading-6 text-white">
+                          {plannerResult?.nextActions?.[0] || t('hero.preview.running')}
+                        </div>
                       </div>
-                      <div className="mt-2 text-sm font-medium text-white">
-                        {candidateName}
-                      </div>
-                    </div>
-                    <div className="rounded-2xl border border-white/10 bg-slate-950/35 p-3">
-                      <div className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                        {t('hero.summary.role')}
-                      </div>
-                      <div className="mt-2 text-sm font-medium text-white">
-                        {jobTitle}
-                      </div>
-                    </div>
-                    <div className="rounded-2xl border border-white/10 bg-slate-950/35 p-3">
-                      <div className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                        {t('hero.summary.priority')}
-                      </div>
-                      <div className="mt-2 text-sm font-medium text-white">
-                        {activeScenario.priority}
+                      <div className="rounded-2xl border border-white/10 bg-slate-950/35 p-3">
+                        <div className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                          {t('planner.risks')}
+                        </div>
+                        <div className="mt-2 text-sm leading-6 text-white">
+                          {plannerResult?.risks?.[0] || t('hero.preview.fallback')}
+                        </div>
                       </div>
                     </div>
-                    <div className="rounded-2xl border border-white/10 bg-slate-950/35 p-3">
-                      <div className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                        {t('hero.summary.automation')}
-                      </div>
-                      <div className="mt-2 text-sm font-medium text-white">
-                        {activeScenario.automation}
-                      </div>
+                  ) : (
+                    <div className="mt-5 space-y-3">
+                      {heroPreviewSteps.map((step, index) => (
+                        <div
+                          key={step}
+                          className="flex items-start gap-3 rounded-2xl border border-white/10 bg-slate-950/35 p-3"
+                        >
+                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/10 text-xs font-semibold text-white">
+                            {index + 1}
+                          </div>
+                          <div className="pt-1 text-sm leading-6 text-slate-200">
+                            {step}
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  </div>
+                  )}
                 </div>
 
                 <div className="rounded-[28px] border border-slate-200/80 bg-white p-5 text-slate-900 shadow-2xl shadow-slate-900/10">
                   <div className="mb-4">
                     <div className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">
-                      {t('demo_scenarios.title')}
+                      {t('hero.scenarios.label')}
                     </div>
                     <p className="mt-2 text-sm leading-6 text-slate-600">
-                      {t('demo_scenarios.description')}
+                      {t('hero.scenarios.description')}
                     </p>
                   </div>
-                  <div className="space-y-3">
+                  <div className="flex flex-wrap gap-2">
                     {demoScenarios.map((scenario) => {
                       const isActive = scenario.id === selectedScenarioId;
 
@@ -746,55 +773,37 @@ export function InterviewSchedulerAgent({
                           data-testid={`scenario-${scenario.id}`}
                           onClick={() => applyScenario(scenario)}
                           className={cn(
-                            'w-full rounded-[24px] border p-4 text-left transition',
+                            'rounded-full border px-4 py-2 text-sm transition',
                             isActive
                               ? 'border-slate-900 bg-slate-900 text-white shadow-lg shadow-slate-300/50'
-                              : 'border-slate-200 bg-slate-50 hover:border-slate-300 hover:bg-white'
+                              : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-white'
                           )}
                         >
-                          <div className="flex flex-wrap items-center justify-between gap-2">
-                            <Badge
-                              className={cn(
-                                'rounded-full px-3 py-1',
-                                isActive
-                                  ? 'border border-white/10 bg-white/10 text-white'
-                                  : 'border border-slate-200 bg-white text-slate-700'
-                              )}
-                            >
-                              {scenario.badge}
-                            </Badge>
-                            {isActive ? (
-                              <Badge className="rounded-full border border-white/10 bg-white/10 text-white">
-                                {t('demo_scenarios.active_label')}
-                              </Badge>
-                            ) : null}
-                          </div>
-                          <div className="mt-3 text-lg font-semibold tracking-tight">
-                            {scenario.title}
-                          </div>
-                          <div
-                            className={cn(
-                              'mt-2 text-sm leading-6',
-                              isActive ? 'text-slate-200' : 'text-slate-600'
-                            )}
-                          >
-                            {scenario.summary}
-                          </div>
-                          <div
-                            className={cn(
-                              'mt-4 flex flex-wrap gap-2 text-xs',
-                              isActive ? 'text-slate-300' : 'text-slate-500'
-                            )}
-                          >
-                            <span>{scenario.sla}</span>
-                            <span>•</span>
-                            <span>{scenario.markets}</span>
-                            <span>•</span>
-                            <span>{scenario.priority}</span>
-                          </div>
+                          {scenario.title}
                         </button>
                       );
                     })}
+                  </div>
+                  <div className="mt-4 rounded-[24px] border border-slate-200 bg-slate-50 p-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Badge className="rounded-full border border-slate-300 bg-white text-slate-700">
+                        {activeScenario.badge}
+                      </Badge>
+                      <Badge className="rounded-full border border-slate-300 bg-white text-slate-700">
+                        {activeScenario.sla}
+                      </Badge>
+                    </div>
+                    <div className="mt-3 text-lg font-semibold tracking-tight text-slate-900">
+                      {activeScenario.title}
+                    </div>
+                    <div className="mt-2 text-sm leading-6 text-slate-600">
+                      {activeScenario.summary}
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-500">
+                      <span>{activeScenario.markets}</span>
+                      <span>•</span>
+                      <span>{activeScenario.priority}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -802,407 +811,287 @@ export function InterviewSchedulerAgent({
           </CardContent>
         </Card>
 
-        <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
-          <div className="space-y-6">
-            <Card className="rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/60 backdrop-blur">
-              <CardHeader>
-                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                  <div className="space-y-2">
-                    <CardTitle className="flex items-center gap-2 text-xl">
-                      <BriefcaseBusiness className="h-5 w-5 text-sky-600" />
-                      {t('intake.title')}
-                    </CardTitle>
-                    <CardDescription className="max-w-2xl text-sm leading-6 text-slate-600">
-                      {t('intake.description')}
-                    </CardDescription>
-                  </div>
-                  <Badge className="rounded-full px-3 py-1 text-sm" variant="secondary">
-                    {activeScenario.title}
-                  </Badge>
+        <div className="grid gap-6 xl:grid-cols-[0.94fr_1.06fr]">
+          <Card className={lightWorkbenchCardClass}>
+            <CardHeader>
+              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                <div className="space-y-2">
+                  <CardTitle className="flex items-center gap-2 text-xl">
+                    <BriefcaseBusiness className="h-5 w-5 text-sky-600" />
+                    {t('intake.title')}
+                  </CardTitle>
+                  <CardDescription className="max-w-2xl text-sm leading-6 text-slate-600">
+                    {t('intake.description')}
+                  </CardDescription>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-5">
-                <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-                  <div className="rounded-[24px] border border-slate-200 bg-slate-50 p-4">
-                    <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                      {t('hero.summary.candidate')}
-                    </div>
-                    <div className="mt-2 font-semibold text-slate-900">
-                      {candidateName}
-                    </div>
+                <Badge
+                  className={cn(lightSolidBadgeClass, 'rounded-full px-3 py-1 text-sm')}
+                  variant="secondary"
+                >
+                  {activeScenario.title}
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-5">
+              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+                <div className={cn(lightWorkbenchInsetClass, 'p-4')}>
+                  <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                    {t('hero.summary.candidate')}
                   </div>
-                  <div className="rounded-[24px] border border-slate-200 bg-slate-50 p-4">
-                    <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                      {t('hero.summary.role')}
-                    </div>
-                    <div className="mt-2 font-semibold text-slate-900">
-                      {jobTitle}
-                    </div>
-                  </div>
-                  <div className="rounded-[24px] border border-slate-200 bg-slate-50 p-4">
-                    <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                      {t('operations.sla')}
-                    </div>
-                    <div className="mt-2 font-semibold text-slate-900">
-                      {activeScenario.sla}
-                    </div>
-                  </div>
-                  <div className="rounded-[24px] border border-slate-200 bg-slate-50 p-4">
-                    <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                      {t('operations.markets')}
-                    </div>
-                    <div className="mt-2 font-semibold text-slate-900">
-                      {activeScenario.markets}
-                    </div>
+                  <div className="mt-2 font-semibold text-slate-900">
+                    {candidateName}
                   </div>
                 </div>
-
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="candidate-name">{t('form.candidate_name')}</Label>
-                    <Input
-                      id="candidate-name"
-                      value={candidateName}
-                      onChange={(event) => setCandidateName(event.target.value)}
-                    />
+                <div className={cn(lightWorkbenchInsetClass, 'p-4')}>
+                  <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                    {t('hero.summary.role')}
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="candidate-email">{t('form.candidate_email')}</Label>
-                    <Input
-                      id="candidate-email"
-                      type="email"
-                      value={candidateEmail}
-                      onChange={(event) => setCandidateEmail(event.target.value)}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="job-title">{t('form.job_title')}</Label>
-                    <Input
-                      id="job-title"
-                      value={jobTitle}
-                      onChange={(event) => setJobTitle(event.target.value)}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="candidate-timezone">
-                      {t('form.candidate_timezone')}
-                    </Label>
-                    <Select
-                      value={candidateTimezone}
-                      onValueChange={setCandidateTimezone}
-                    >
-                      <SelectTrigger id="candidate-timezone" className="w-full">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {timezoneOptions.map((timezone) => (
-                          <SelectItem key={timezone.value} value={timezone.value}>
-                            {timezone.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2 md:col-span-2">
-                    <Label htmlFor="scheduling-notes">{t('form.notes')}</Label>
-                    <Textarea
-                      id="scheduling-notes"
-                      rows={4}
-                      value={notes}
-                      onChange={(event) => setNotes(event.target.value)}
-                    />
-                  </div>
-                  <div className="md:col-span-2 flex flex-wrap gap-3">
-                    <Button onClick={runAgent} disabled={isRunningAgent}>
-                      <Sparkles className="mr-2 h-4 w-4" />
-                      {isRunningAgent
-                        ? t('form.running_agent')
-                        : t('form.run_agent')}
-                    </Button>
-                    <Button variant="outline" onClick={resetAgent}>
-                      <RefreshCcw className="mr-2 h-4 w-4" />
-                      {t('form.reset')}
-                    </Button>
+                  <div className="mt-2 font-semibold text-slate-900">
+                    {jobTitle}
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-
-            <Card
-              id="recruiter-console"
-              className="scroll-mt-24 rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur"
-            >
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <CalendarDays className="h-5 w-5 text-sky-600" />
-                  {t('console.title')}
-                </CardTitle>
-                <CardDescription className="text-slate-600">
-                  {t('console.description')}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {recommendations.map(({ stage, selected, alternatives }) => {
-                  const booked = bookings[stage.id] || null;
-                  const chosen = booked || selected;
-                  const status = stageStatus[stage.id];
-
-                  return (
-                    <Card
-                      key={stage.id}
-                      className="rounded-[24px] border border-slate-200 bg-slate-50/70 py-0 shadow-none"
-                    >
-                      <CardContent className="space-y-4 p-5">
-                        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                          <div className="space-y-2">
-                            <div className="flex flex-wrap items-center gap-2">
-                              <Badge variant="secondary">{stage.label}</Badge>
-                              <Badge variant="outline">{stage.duration} min</Badge>
-                              {status ? <Badge>{statusLabels[status]}</Badge> : null}
-                            </div>
-                            {chosen ? (
-                              <>
-                                <div className="text-lg font-semibold text-slate-900">
-                                  {chosen.interviewerName}
-                                </div>
-                                <div className="text-sm text-slate-600">
-                                  {roleLabels[stage.interviewerRole]}
-                                </div>
-                                <div className="flex flex-wrap gap-3 text-sm text-slate-700">
-                                  <span className="inline-flex items-center gap-1">
-                                    <Clock3 className="h-4 w-4 text-sky-600" />
-                                    {formatTime(chosen.slot, candidateTimezone)} (
-                                    {candidateTimezone})
-                                  </span>
-                                  <span className="inline-flex items-center gap-1">
-                                    <Globe2 className="h-4 w-4 text-amber-600" />
-                                    {t('console.interviewer_time', {
-                                      time: formatTime(
-                                        chosen.slot,
-                                        chosen.interviewerTimezone
-                                      ),
-                                      timezone: chosen.interviewerTimezone,
-                                    })}
-                                  </span>
-                                </div>
-                              </>
-                            ) : (
-                              <div className="text-sm text-rose-600">
-                                {t('console.no_slot')}
-                              </div>
-                            )}
-                          </div>
-                          <div className="flex flex-wrap gap-2">
-                            {selected ? (
-                              <Button onClick={() => bookStage(stage.id, selected)}>
-                                <CheckCircle2 className="mr-2 h-4 w-4" />
-                                {t('console.book')}
-                              </Button>
-                            ) : null}
-                            {alternatives.length ? (
-                              <Button
-                                variant="outline"
-                                onClick={() =>
-                                  rescheduleStage(stage.id, alternatives)
-                                }
-                              >
-                                <RefreshCcw className="mr-2 h-4 w-4" />
-                                {t('console.reschedule')}
-                              </Button>
-                            ) : null}
-                            {alternatives.length ? (
-                              <Button
-                                variant="outline"
-                                onClick={() => markNoShow(stage.id, alternatives)}
-                              >
-                                <AlertCircle className="mr-2 h-4 w-4" />
-                                {t('console.no_show')}
-                              </Button>
-                            ) : null}
-                          </div>
-                        </div>
-
-                        {alternatives.length ? (
-                          <div className="space-y-2 rounded-2xl border border-dashed border-slate-200 bg-white p-3">
-                            <div className="text-sm font-medium text-slate-700">
-                              {t('console.fallback_options')}
-                            </div>
-                            {alternatives.map((alternative, index) => (
-                              <div
-                                key={`${stage.id}-${index}`}
-                                className="flex flex-wrap items-center justify-between gap-2 text-sm text-slate-600"
-                              >
-                                <span>
-                                  {alternative.interviewerName} ·{' '}
-                                  {formatTime(
-                                    alternative.slot,
-                                    candidateTimezone
-                                  )}{' '}
-                                  ({candidateTimezone})
-                                </span>
-                                <span>{alternative.interviewerTimezone}</span>
-                              </div>
-                            ))}
-                          </div>
-                        ) : null}
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="space-y-6">
-            <Card
-              id="candidate-self-scheduling"
-              className="scroll-mt-24 rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur"
-            >
-              <CardHeader>
-                <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-                  <div>
-                    <CardTitle className="flex items-center gap-2 text-xl">
-                      <UserCheck className="h-5 w-5 text-emerald-600" />
-                      {t('candidate.title')}
-                    </CardTitle>
-                    <CardDescription className="text-slate-600">
-                      {t('candidate.description')}
-                    </CardDescription>
+                <div className={cn(lightWorkbenchInsetClass, 'p-4')}>
+                  <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                    {t('operations.sla')}
                   </div>
-                  <Badge variant="outline" className="rounded-full px-3 py-1">
-                    {activeScenario.badge}
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="rounded-[24px] bg-slate-100 p-4">
-                  <div className="text-sm text-slate-500">
-                    {t('candidate.current_stage_label')}
-                  </div>
-                  <div className="mt-1 font-semibold text-slate-900">
-                    {allStagesBooked
-                      ? t('candidate.completed')
-                      : currentStagePlan?.stage.label}
-                  </div>
-                  <div className="mt-1 text-sm text-slate-600">
-                    {candidateName} · {candidateEmail}
+                  <div className="mt-2 font-semibold text-slate-900">
+                    {activeScenario.sla}
                   </div>
                 </div>
-
-                {candidateOptions.length ? (
-                  <div className="space-y-3">
-                    {candidateOptions.map((option, index) => {
-                      const isSelected =
-                        selectedCandidateOption?.slot === option.slot;
-                      const optionTime = formatTime(
-                        option.slot,
-                        candidateTimezone
-                      );
-
-                      return (
-                        <button
-                          key={`${option.stageId}-${option.interviewerId}-${option.slot}`}
-                          type="button"
-                          data-testid={`candidate-option-${index}`}
-                          aria-label={t('candidate.option_aria', {
-                            stage: option.stageLabel,
-                            interviewer: option.interviewerName,
-                            time: optionTime,
-                          })}
-                          onClick={() =>
-                            currentStagePlan
-                              ? setSelectedCandidateOptions((prev) => ({
-                                  ...prev,
-                                  [currentStagePlan.stage.id]: option,
-                                }))
-                              : undefined
-                          }
-                          className={cn(
-                            'w-full rounded-[24px] border p-4 text-left transition',
-                            isSelected
-                              ? 'border-slate-900 bg-slate-900 text-white shadow-lg shadow-slate-300/50'
-                              : 'border-slate-200 bg-white hover:border-slate-300'
-                          )}
-                        >
-                          <div className="font-medium">
-                            {optionTime} ({candidateTimezone})
-                          </div>
-                          <div
-                            className={cn(
-                              'mt-1 text-sm',
-                              isSelected ? 'text-slate-200' : 'text-slate-600'
-                            )}
-                          >
-                            {t('candidate.option_subtitle', {
-                              interviewer: option.interviewerName,
-                              stage: option.stageLabel,
-                            })}
-                          </div>
-                        </button>
-                      );
-                    })}
+                <div className={cn(lightWorkbenchInsetClass, 'p-4')}>
+                  <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                    {t('operations.markets')}
                   </div>
-                ) : (
-                  <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
-                    {t('candidate.all_booked')}
+                  <div className="mt-2 font-semibold text-slate-900">
+                    {activeScenario.markets}
                   </div>
-                )}
+                </div>
+              </div>
 
-                <div className="flex flex-wrap gap-2">
-                  <Button
-                    disabled={!selectedCandidateOption || !nextPendingStagePlan}
-                    onClick={() =>
-                      nextPendingStagePlan && selectedCandidateOption
-                        ? bookStage(
-                            nextPendingStagePlan.stage.id,
-                            selectedCandidateOption,
-                            'candidate'
-                          )
-                        : undefined
-                    }
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="candidate-name"
+                    className={lightFieldLabelClass}
                   >
-                    <CalendarClock className="mr-2 h-4 w-4" />
-                    {t('candidate.confirm')}
+                    {t('form.candidate_name')}
+                  </Label>
+                  <Input
+                    id="candidate-name"
+                    className={lightFieldClass}
+                    value={candidateName}
+                    onChange={(event) => setCandidateName(event.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="candidate-email"
+                    className={lightFieldLabelClass}
+                  >
+                    {t('form.candidate_email')}
+                  </Label>
+                  <Input
+                    id="candidate-email"
+                    type="email"
+                    className={lightFieldClass}
+                    value={candidateEmail}
+                    onChange={(event) => setCandidateEmail(event.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="job-title"
+                    className={lightFieldLabelClass}
+                  >
+                    {t('form.job_title')}
+                  </Label>
+                  <Input
+                    id="job-title"
+                    className={lightFieldClass}
+                    value={jobTitle}
+                    onChange={(event) => setJobTitle(event.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="candidate-timezone"
+                    className={lightFieldLabelClass}
+                  >
+                    {t('form.candidate_timezone')}
+                  </Label>
+                  <Select
+                    value={candidateTimezone}
+                    onValueChange={setCandidateTimezone}
+                  >
+                    <SelectTrigger
+                      id="candidate-timezone"
+                      className={cn('w-full', lightFieldClass)}
+                    >
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className={lightSelectContentClass}>
+                      {timezoneOptions.map((timezone) => (
+                        <SelectItem key={timezone.value} value={timezone.value}>
+                          {timezone.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2 md:col-span-2">
+                  <Label
+                    htmlFor="scheduling-notes"
+                    className={lightFieldLabelClass}
+                  >
+                    {t('form.notes')}
+                  </Label>
+                  <Textarea
+                    id="scheduling-notes"
+                    rows={4}
+                    className={lightFieldClass}
+                    value={notes}
+                    onChange={(event) => setNotes(event.target.value)}
+                  />
+                </div>
+                <div className="md:col-span-2 flex flex-wrap gap-3">
+                  <Button onClick={runAgent} disabled={isRunningAgent}>
+                    <Sparkles className="mr-2 h-4 w-4" />
+                    {isRunningAgent
+                      ? t('form.running_agent')
+                      : t('form.run_agent')}
                   </Button>
                   <Button
                     variant="outline"
-                    disabled={!nextPendingStagePlan}
-                    onClick={() =>
-                      nextPendingStagePlan
-                        ? markNoShow(
-                            nextPendingStagePlan.stage.id,
-                            nextPendingStagePlan.alternatives
-                          )
-                        : undefined
-                    }
+                    className={lightOutlineButtonClass}
+                    onClick={resetAgent}
                   >
                     <RefreshCcw className="mr-2 h-4 w-4" />
-                    {t('candidate.simulate_no_show')}
+                    {t('form.reset')}
                   </Button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </CardContent>
+          </Card>
 
-            <Card
-              id="planner-output"
-              className="scroll-mt-24 rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur"
-            >
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <Sparkles className="h-5 w-5 text-violet-600" />
-                  {t('planner.title')}
-                </CardTitle>
-                <CardDescription className="text-slate-600">
-                  {plannerResult?.summary || t('planner.description')}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm text-slate-700">
-                <div className="rounded-2xl border border-slate-200 p-4">
-                  <div className="font-medium">{t('planner.recruiter_brief')}</div>
-                  <div className="mt-2">
-                    {plannerResult?.recruiterBrief || t('planner.placeholder')}
+          <Card
+            id="planner-output"
+            className={cn('scroll-mt-24', lightWorkbenchCardClass)}
+          >
+            <CardHeader>
+              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-2 text-xl">
+                    <Sparkles className="h-5 w-5 text-violet-600" />
+                    {t('planner.title')}
+                  </CardTitle>
+                  <CardDescription className="text-slate-600">
+                    {plannerResult?.summary || t('planner.description')}
+                  </CardDescription>
+                </div>
+                <Badge
+                  variant="outline"
+                  className={cn(lightOutlineBadgeClass, 'rounded-full px-3 py-1')}
+                >
+                  {hasStarted
+                    ? t('hero.preview.ready_badge')
+                    : t('hero.preview.label')}
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-5 text-sm text-slate-700">
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                <div className={cn(lightWorkbenchInsetClass, 'p-4')}>
+                  <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                    {t('planner.booked_rounds')}
+                  </div>
+                  <div
+                    className="mt-2 text-2xl font-semibold text-slate-900"
+                    data-testid="booked-count"
+                  >
+                    {totalBooked}
                   </div>
                 </div>
+                <div className={cn(lightWorkbenchInsetClass, 'p-4')}>
+                  <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                    {t('hero.stats.cross_timezone')}
+                  </div>
+                  <div className="mt-2 text-2xl font-semibold text-slate-900">
+                    {crossTimezoneCount}/{stages.length}
+                  </div>
+                </div>
+                <div className={cn(lightWorkbenchInsetClass, 'p-4')}>
+                  <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                    {t('operations.fallback_coverage')}
+                  </div>
+                  <div className="mt-2 text-2xl font-semibold text-slate-900">
+                    {fallbackCoverageCount}/{stages.length}
+                  </div>
+                </div>
+                <div className={cn(lightWorkbenchInsetClass, 'p-4')}>
+                  <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                    {t('operations.priority')}
+                  </div>
+                  <div className="mt-2 font-semibold text-slate-900">
+                    {activeScenario.priority}
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 p-4">
+                <div className="font-medium">{t('planner.recruiter_brief')}</div>
+                <div className="mt-2 text-slate-600">
+                  {plannerResult?.recruiterBrief || t('hero.preview.description')}
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 p-4">
+                <div className="font-medium">{t('planner.recommended_path')}</div>
+                <div className="mt-3 space-y-3">
+                  {hasStarted ? (
+                    planStages.map(({ stage, chosen, alternativesCount, status }) => (
+                      <div
+                        key={`plan-stage-${stage.id}`}
+                        className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                      >
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <div className="font-medium text-slate-900">
+                            {stage.label}
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            <Badge
+                              variant="outline"
+                              className={lightOutlineBadgeClass}
+                            >
+                              {stage.duration} min
+                            </Badge>
+                            {status ? <Badge>{statusLabels[status]}</Badge> : null}
+                          </div>
+                        </div>
+                        <div className="mt-2 text-sm text-slate-600">
+                          {chosen ? (
+                            <>
+                              {chosen.interviewerName} ·{' '}
+                              {formatTime(chosen.slot, candidateTimezone)} (
+                              {candidateTimezone})
+                            </>
+                          ) : (
+                            t('console.no_slot')
+                          )}
+                        </div>
+                        <div className="mt-2 text-xs text-slate-500">
+                          {t('console.fallback_options')}: {alternativesCount}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-slate-600">
+                      {t('hero.preview.title')}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid gap-4 lg:grid-cols-2">
                 <div className="rounded-2xl border border-slate-200 p-4">
                   <div className="font-medium">{t('planner.next_actions')}</div>
                   <div className="mt-2 space-y-2">
@@ -1223,169 +1112,508 @@ export function InterviewSchedulerAgent({
                     ))}
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
 
-            <Card className="rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <Mail className="h-5 w-5 text-sky-600" />
-                  {t('notifications.title')}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm text-slate-700">
-                <div className="rounded-2xl border border-slate-200 p-4">
-                  <div className="font-medium">
-                    {t('notifications.candidate_confirmation_title')}
-                  </div>
-                  <div className="mt-2">
-                    {plannerResult?.candidateConfirmation ||
-                      t('notifications.candidate_confirmation_body', {
-                        candidate: candidateName,
-                        role: jobTitle,
-                      })}
-                  </div>
+              <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4">
+                <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                  {t('planner.latest_activity')}
                 </div>
-                <div className="rounded-2xl border border-slate-200 p-4">
-                  <div className="font-medium">
-                    {t('notifications.interviewer_reminder_title')}
-                  </div>
-                  <div className="mt-2">
-                    {plannerResult?.interviewerReminder ||
-                      t('notifications.interviewer_reminder_body')}
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-slate-200 p-4">
-                  <div className="font-medium">
-                    {t('notifications.no_show_policy_title')}
-                  </div>
-                  <div className="mt-2">
-                    {plannerResult?.noShowPolicy ||
-                      t('notifications.no_show_policy_body')}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                <div className="mt-2 text-slate-700">{latestActivity}</div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
-            <Card className="rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <Users className="h-5 w-5 text-amber-600" />
-                  {t('operations.title')}
-                </CardTitle>
-                <CardDescription className="text-slate-600">
-                  {t('operations.description')}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-4">
-                  {operationsCards.map((card) => (
-                    <div
-                      key={card.label}
-                      className="rounded-[24px] bg-slate-100 p-4"
-                    >
-                      <div className="text-sm text-slate-500">{card.label}</div>
-                      <div className="mt-1 text-sm font-semibold text-slate-900 md:text-base">
-                        {card.value}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card
-              id="workflow"
-              className="scroll-mt-24 rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur"
+        <div className="space-y-4">
+          <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">
+                {t('workspace.label')}
+              </div>
+              <h3 className="mt-1 text-2xl font-semibold tracking-tight text-slate-900">
+                {t('workspace.title')}
+              </h3>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
+                {t('workspace.description')}
+              </p>
+            </div>
+            <Badge
+              variant="outline"
+              className={cn(lightOutlineBadgeClass, 'rounded-full px-3 py-1')}
             >
-              <CardHeader>
-                <CardTitle className="text-xl">{t('guide.title')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Tabs defaultValue="flow">
-                  <TabsList className="grid w-full grid-cols-4">
-                    <TabsTrigger value="flow">{t('guide.tabs.flow')}</TabsTrigger>
-                    <TabsTrigger value="logic">
-                      {t('guide.tabs.logic')}
-                    </TabsTrigger>
-                    <TabsTrigger value="actions">
-                      {t('guide.tabs.actions')}
-                    </TabsTrigger>
-                    <TabsTrigger value="next">{t('guide.tabs.next')}</TabsTrigger>
-                  </TabsList>
-                  <TabsContent
-                    value="flow"
-                    className="space-y-3 pt-4 text-sm text-slate-700"
-                  >
-                    {flowSteps.map((step, index) => (
-                      <div
-                        key={`flow-step-${index}`}
-                        className="rounded-[24px] border border-slate-200 p-4"
-                      >
-                        <div className="font-medium">{step.title}</div>
-                        <div className="mt-1 text-slate-600">
-                          {step.description}
-                        </div>
-                      </div>
-                    ))}
-                  </TabsContent>
-                  <TabsContent
-                    value="logic"
-                    className="space-y-3 pt-4 text-sm text-slate-700"
-                  >
-                    {logicItems.map((item, index) => (
-                      <p key={`logic-item-${index}`}>{item}</p>
-                    ))}
-                  </TabsContent>
-                  <TabsContent
-                    value="actions"
-                    className="space-y-3 pt-4 text-sm text-slate-700"
-                  >
-                    {actionItems.map((item, index) => (
-                      <p key={`action-item-${index}`}>{item}</p>
-                    ))}
-                  </TabsContent>
-                  <TabsContent
-                    value="next"
-                    className="space-y-3 pt-4 text-sm text-slate-700"
-                  >
-                    <p>{t('guide.next.intro')}</p>
-                    {nextItems.map((item, index) => (
-                      <p key={`next-item-${index}`}>{item}</p>
-                    ))}
-                  </TabsContent>
-                </Tabs>
-              </CardContent>
-            </Card>
-
-            <Card
-              id="agent-activity"
-              className="scroll-mt-24 rounded-[28px] border-slate-200/80 bg-white/90 shadow-lg shadow-slate-200/50 backdrop-blur"
-            >
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <AlertCircle className="h-5 w-5 text-rose-600" />
-                  {t('activity.title')}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {agentLog.map((item, index) => (
-                    <div
-                      key={`agent-log-${index}`}
-                      className="rounded-2xl border border-slate-200 p-3 text-sm text-slate-700"
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
-                <Separator className="my-4" />
-                <div className="text-sm text-slate-500">
-                  {t('activity.footer')}
-                </div>
-              </CardContent>
-            </Card>
+              {activeScenario.badge}
+            </Badge>
           </div>
+
+          <Tabs defaultValue="schedule">
+            <TabsList className="grid w-full grid-cols-4 border-slate-200 bg-slate-100 text-slate-500 dark:border-slate-200 dark:bg-slate-100 dark:text-slate-500">
+              <TabsTrigger
+                value="schedule"
+                className="text-slate-600 data-[state=active]:bg-white data-[state=active]:text-slate-900 dark:text-slate-600 dark:data-[state=active]:bg-white dark:data-[state=active]:text-slate-900"
+              >
+                {t('workspace.tabs.schedule')}
+              </TabsTrigger>
+              <TabsTrigger
+                value="candidate"
+                className="text-slate-600 data-[state=active]:bg-white data-[state=active]:text-slate-900 dark:text-slate-600 dark:data-[state=active]:bg-white dark:data-[state=active]:text-slate-900"
+              >
+                {t('workspace.tabs.candidate')}
+              </TabsTrigger>
+              <TabsTrigger
+                value="messages"
+                className="text-slate-600 data-[state=active]:bg-white data-[state=active]:text-slate-900 dark:text-slate-600 dark:data-[state=active]:bg-white dark:data-[state=active]:text-slate-900"
+              >
+                {t('workspace.tabs.messages')}
+              </TabsTrigger>
+              <TabsTrigger
+                value="activity"
+                className="text-slate-600 data-[state=active]:bg-white data-[state=active]:text-slate-900 dark:text-slate-600 dark:data-[state=active]:bg-white dark:data-[state=active]:text-slate-900"
+              >
+                {t('workspace.tabs.activity')}
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="schedule" className="pt-4">
+              <Card
+                id="recruiter-console"
+                className={cn('scroll-mt-24', lightWorkbenchCardClass)}
+              >
+                <CardHeader>
+                  <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                    <div>
+                      <CardTitle className="flex items-center gap-2 text-xl">
+                        <CalendarDays className="h-5 w-5 text-sky-600" />
+                        {t('console.title')}
+                      </CardTitle>
+                      <CardDescription className="text-slate-600">
+                        {t('console.description')}
+                      </CardDescription>
+                    </div>
+                    <Button
+                      data-testid="hero-auto-book"
+                      variant="outline"
+                      className={lightOutlineButtonClass}
+                      onClick={autoBookTopPath}
+                    >
+                      <CheckCircle2 className="mr-2 h-4 w-4" />
+                      {t('hero.actions.auto_book')}
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {recommendations.map(({ stage, selected, alternatives }) => {
+                    const booked = bookings[stage.id] || null;
+                    const chosen = booked || selected;
+                    const status = stageStatus[stage.id];
+
+                    return (
+                      <Card
+                        key={stage.id}
+                        className="rounded-[24px] border border-slate-200 bg-slate-50/80 py-0 text-slate-900 shadow-none dark:border-slate-200 dark:bg-slate-50/80 dark:text-slate-900"
+                      >
+                        <CardContent className="space-y-4 p-5">
+                          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                            <div className="space-y-2">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <Badge
+                                  variant="secondary"
+                                  className={lightSolidBadgeClass}
+                                >
+                                  {stage.label}
+                                </Badge>
+                                <Badge
+                                  variant="outline"
+                                  className={lightOutlineBadgeClass}
+                                >
+                                  {stage.duration} min
+                                </Badge>
+                                {status ? <Badge>{statusLabels[status]}</Badge> : null}
+                              </div>
+                              {chosen ? (
+                                <>
+                                  <div className="text-lg font-semibold text-slate-900">
+                                    {chosen.interviewerName}
+                                  </div>
+                                  <div className="text-sm text-slate-600">
+                                    {roleLabels[stage.interviewerRole]}
+                                  </div>
+                                  <div className="flex flex-wrap gap-3 text-sm text-slate-700">
+                                    <span className="inline-flex items-center gap-1">
+                                      <Clock3 className="h-4 w-4 text-sky-600" />
+                                      {formatTime(chosen.slot, candidateTimezone)} (
+                                      {candidateTimezone})
+                                    </span>
+                                    <span className="inline-flex items-center gap-1">
+                                      <Globe2 className="h-4 w-4 text-amber-600" />
+                                      {t('console.interviewer_time', {
+                                        time: formatTime(
+                                          chosen.slot,
+                                          chosen.interviewerTimezone
+                                        ),
+                                        timezone: chosen.interviewerTimezone,
+                                      })}
+                                    </span>
+                                  </div>
+                                </>
+                              ) : (
+                                <div className="text-sm text-rose-600">
+                                  {t('console.no_slot')}
+                                </div>
+                              )}
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                              {selected ? (
+                                <Button onClick={() => bookStage(stage.id, selected)}>
+                                  <CheckCircle2 className="mr-2 h-4 w-4" />
+                                  {t('console.book')}
+                                </Button>
+                              ) : null}
+                              {alternatives.length ? (
+                                <Button
+                                  variant="outline"
+                                  className={lightOutlineButtonClass}
+                                  onClick={() =>
+                                    rescheduleStage(stage.id, alternatives)
+                                  }
+                                >
+                                  <RefreshCcw className="mr-2 h-4 w-4" />
+                                  {t('console.reschedule')}
+                                </Button>
+                              ) : null}
+                              {alternatives.length ? (
+                                <Button
+                                  variant="outline"
+                                  className={lightOutlineButtonClass}
+                                  onClick={() => markNoShow(stage.id, alternatives)}
+                                >
+                                  <AlertCircle className="mr-2 h-4 w-4" />
+                                  {t('console.no_show')}
+                                </Button>
+                              ) : null}
+                            </div>
+                          </div>
+
+                          {alternatives.length ? (
+                            <div className="space-y-2 rounded-2xl border border-dashed border-slate-200 bg-white p-3 text-slate-900 dark:border-slate-200 dark:bg-white dark:text-slate-900">
+                              <div className="text-sm font-medium text-slate-700">
+                                {t('console.fallback_options')}
+                              </div>
+                              {alternatives.map((alternative, index) => (
+                                <div
+                                  key={`${stage.id}-${index}`}
+                                  className="flex flex-wrap items-center justify-between gap-2 text-sm text-slate-600"
+                                >
+                                  <span>
+                                    {alternative.interviewerName} ·{' '}
+                                    {formatTime(
+                                      alternative.slot,
+                                      candidateTimezone
+                                    )}{' '}
+                                    ({candidateTimezone})
+                                  </span>
+                                  <span>{alternative.interviewerTimezone}</span>
+                                </div>
+                              ))}
+                            </div>
+                          ) : null}
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="candidate" className="pt-4">
+              <Card
+                id="candidate-self-scheduling"
+                className={cn('scroll-mt-24', lightWorkbenchCardClass)}
+              >
+                <CardHeader>
+                  <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                    <div>
+                      <CardTitle className="flex items-center gap-2 text-xl">
+                        <UserCheck className="h-5 w-5 text-emerald-600" />
+                        {t('candidate.title')}
+                      </CardTitle>
+                      <CardDescription className="text-slate-600">
+                        {t('candidate.description')}
+                      </CardDescription>
+                    </div>
+                    <Badge
+                      variant="outline"
+                      className={cn(lightOutlineBadgeClass, 'rounded-full px-3 py-1')}
+                    >
+                      {activeScenario.badge}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-[24px] bg-slate-100 p-4 text-slate-900 dark:bg-slate-100 dark:text-slate-900">
+                    <div className="text-sm text-slate-500">
+                      {t('candidate.current_stage_label')}
+                    </div>
+                    <div className="mt-1 font-semibold text-slate-900">
+                      {allStagesBooked
+                        ? t('candidate.completed')
+                        : currentStagePlan?.stage.label}
+                    </div>
+                    <div className="mt-1 text-sm text-slate-600">
+                      {candidateName} · {candidateEmail}
+                    </div>
+                  </div>
+
+                  {candidateOptions.length ? (
+                    <div className="space-y-3">
+                      {candidateOptions.map((option, index) => {
+                        const isSelected =
+                          selectedCandidateOption?.slot === option.slot;
+                        const optionTime = formatTime(
+                          option.slot,
+                          candidateTimezone
+                        );
+
+                        return (
+                          <button
+                            key={`${option.stageId}-${option.interviewerId}-${option.slot}`}
+                            type="button"
+                            data-testid={`candidate-option-${index}`}
+                            aria-label={t('candidate.option_aria', {
+                              stage: option.stageLabel,
+                              interviewer: option.interviewerName,
+                              time: optionTime,
+                            })}
+                            onClick={() =>
+                              currentStagePlan
+                                ? setSelectedCandidateOptions((prev) => ({
+                                    ...prev,
+                                    [currentStagePlan.stage.id]: option,
+                                  }))
+                                : undefined
+                            }
+                            className={cn(
+                              'w-full rounded-[24px] border p-4 text-left transition',
+                              isSelected
+                                ? 'border-slate-900 bg-slate-900 text-white shadow-lg shadow-slate-300/50'
+                                : 'border-slate-200 bg-white hover:border-slate-300'
+                            )}
+                          >
+                            <div className="font-medium">
+                              {optionTime} ({candidateTimezone})
+                            </div>
+                            <div
+                              className={cn(
+                                'mt-1 text-sm',
+                                isSelected ? 'text-slate-200' : 'text-slate-600'
+                              )}
+                            >
+                              {t('candidate.option_subtitle', {
+                                interviewer: option.interviewerName,
+                                stage: option.stageLabel,
+                              })}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 dark:border-slate-200 dark:bg-slate-50 dark:text-slate-600">
+                      {t('candidate.all_booked')}
+                    </div>
+                  )}
+
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      disabled={!selectedCandidateOption || !nextPendingStagePlan}
+                      onClick={() =>
+                        nextPendingStagePlan && selectedCandidateOption
+                          ? bookStage(
+                              nextPendingStagePlan.stage.id,
+                              selectedCandidateOption,
+                              'candidate'
+                            )
+                          : undefined
+                      }
+                    >
+                      <CalendarClock className="mr-2 h-4 w-4" />
+                      {t('candidate.confirm')}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className={lightOutlineButtonClass}
+                      disabled={!nextPendingStagePlan}
+                      onClick={() =>
+                        nextPendingStagePlan
+                          ? markNoShow(
+                              nextPendingStagePlan.stage.id,
+                              nextPendingStagePlan.alternatives
+                            )
+                          : undefined
+                      }
+                    >
+                      <RefreshCcw className="mr-2 h-4 w-4" />
+                      {t('candidate.simulate_no_show')}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="messages" className="pt-4">
+              <Card className={lightWorkbenchCardClass}>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-xl">
+                    <Mail className="h-5 w-5 text-sky-600" />
+                    {t('notifications.title')}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 text-sm text-slate-700">
+                  <div className="rounded-2xl border border-slate-200 p-4">
+                    <div className="font-medium">
+                      {t('notifications.candidate_confirmation_title')}
+                    </div>
+                    <div className="mt-2">
+                      {plannerResult?.candidateConfirmation ||
+                        t('notifications.candidate_confirmation_body', {
+                          candidate: candidateName,
+                          role: jobTitle,
+                        })}
+                    </div>
+                  </div>
+                  <div className="rounded-2xl border border-slate-200 p-4">
+                    <div className="font-medium">
+                      {t('notifications.interviewer_reminder_title')}
+                    </div>
+                    <div className="mt-2">
+                      {plannerResult?.interviewerReminder ||
+                        t('notifications.interviewer_reminder_body')}
+                    </div>
+                  </div>
+                  <div className="rounded-2xl border border-slate-200 p-4">
+                    <div className="font-medium">
+                      {t('notifications.no_show_policy_title')}
+                    </div>
+                    <div className="mt-2">
+                      {plannerResult?.noShowPolicy ||
+                        t('notifications.no_show_policy_body')}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="activity" className="pt-4">
+              <div className="grid gap-6 lg:grid-cols-[0.92fr_1.08fr]">
+                <Card
+                  id="workflow"
+                  className={cn('scroll-mt-24', lightWorkbenchCardClass)}
+                >
+                  <CardHeader>
+                    <CardTitle className="text-xl">{t('guide.title')}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <Tabs defaultValue="flow">
+                      <TabsList className="grid w-full grid-cols-4 border-slate-200 bg-slate-100 text-slate-500 dark:border-slate-200 dark:bg-slate-100 dark:text-slate-500">
+                        <TabsTrigger
+                          value="flow"
+                          className="text-slate-600 data-[state=active]:bg-white data-[state=active]:text-slate-900 dark:text-slate-600 dark:data-[state=active]:bg-white dark:data-[state=active]:text-slate-900"
+                        >
+                          {t('guide.tabs.flow')}
+                        </TabsTrigger>
+                        <TabsTrigger
+                          value="logic"
+                          className="text-slate-600 data-[state=active]:bg-white data-[state=active]:text-slate-900 dark:text-slate-600 dark:data-[state=active]:bg-white dark:data-[state=active]:text-slate-900"
+                        >
+                          {t('guide.tabs.logic')}
+                        </TabsTrigger>
+                        <TabsTrigger
+                          value="actions"
+                          className="text-slate-600 data-[state=active]:bg-white data-[state=active]:text-slate-900 dark:text-slate-600 dark:data-[state=active]:bg-white dark:data-[state=active]:text-slate-900"
+                        >
+                          {t('guide.tabs.actions')}
+                        </TabsTrigger>
+                        <TabsTrigger
+                          value="next"
+                          className="text-slate-600 data-[state=active]:bg-white data-[state=active]:text-slate-900 dark:text-slate-600 dark:data-[state=active]:bg-white dark:data-[state=active]:text-slate-900"
+                        >
+                          {t('guide.tabs.next')}
+                        </TabsTrigger>
+                      </TabsList>
+                      <TabsContent
+                        value="flow"
+                        className="space-y-3 pt-4 text-sm text-slate-700"
+                      >
+                        {flowSteps.map((step, index) => (
+                          <div
+                            key={`flow-step-${index}`}
+                            className="rounded-[24px] border border-slate-200 p-4"
+                          >
+                            <div className="font-medium">{step.title}</div>
+                            <div className="mt-1 text-slate-600">
+                              {step.description}
+                            </div>
+                          </div>
+                        ))}
+                      </TabsContent>
+                      <TabsContent
+                        value="logic"
+                        className="space-y-3 pt-4 text-sm text-slate-700"
+                      >
+                        {logicItems.map((item, index) => (
+                          <p key={`logic-item-${index}`}>{item}</p>
+                        ))}
+                      </TabsContent>
+                      <TabsContent
+                        value="actions"
+                        className="space-y-3 pt-4 text-sm text-slate-700"
+                      >
+                        {actionItems.map((item, index) => (
+                          <p key={`action-item-${index}`}>{item}</p>
+                        ))}
+                      </TabsContent>
+                      <TabsContent
+                        value="next"
+                        className="space-y-3 pt-4 text-sm text-slate-700"
+                      >
+                        <p>{t('guide.next.intro')}</p>
+                        {nextItems.map((item, index) => (
+                          <p key={`next-item-${index}`}>{item}</p>
+                        ))}
+                      </TabsContent>
+                    </Tabs>
+                  </CardContent>
+                </Card>
+
+                <Card
+                  id="agent-activity"
+                  className={cn('scroll-mt-24', lightWorkbenchCardClass)}
+                >
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-xl">
+                      <AlertCircle className="h-5 w-5 text-rose-600" />
+                      {t('activity.title')}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      {agentLog.map((item, index) => (
+                        <div
+                          key={`agent-log-${index}`}
+                          className="rounded-2xl border border-slate-200 p-3 text-sm text-slate-700"
+                        >
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                    <Separator className="my-4" />
+                    <div className="text-sm text-slate-500">
+                      {t('activity.footer')}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </section>

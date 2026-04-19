@@ -14,7 +14,7 @@
     "nav": {
       "items": [
         {
-          "title": "Demo",
+          "title": "Overview",
           "url": "/#demo",
           "icon": "Sparkles"
         },
@@ -50,7 +50,7 @@
     "id": "footer",
     "brand": {
       "title": "Interview Scheduling AI Agent",
-      "description": "A polished product demo focused on recruiter scheduling operations, candidate self-scheduling, and exception handling across interview workflows.",
+      "description": "An intelligent scheduling platform for recruiting teams, unifying recruiter operations, candidate self-scheduling, and exception recovery.",
       "logo": {
         "src": "/logo.png",
         "alt": "Interview Scheduling AI Agent",
@@ -65,7 +65,7 @@
           "title": "Product",
           "children": [
             {
-              "title": "Live Demo",
+              "title": "Platform Overview",
               "url": "/#demo",
               "target": "_self"
             },
